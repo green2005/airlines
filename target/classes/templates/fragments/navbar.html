@@ -1,5 +1,4 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <!-- <a class="navbar-brand" href="#">Navbar</a> -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -26,7 +25,11 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="@{/personnel}">Personnel</a>
+                <a class="nav-link" th:href="@{/personnel}">Personnel</a>
+            </li>
+
+            <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a class="nav-link" th:href="@{/users}">Users</a>
             </li>
 
             <li class="nav-item dropdown">
@@ -55,8 +58,8 @@
         <div sec:authorize="isAuthenticated()">
             <form class="form-inline my-2 my-lg-0"
                   th:action="@{/logout}" method="post">
-                Hello, <span sec:authentication="principal.username" style="color:red">guest</span>!
-                <input class="btn btn-outline-success" type="submit" value="Sign Out"/>
+                <span sec:authentication="principal.username" style="color:#E5E7E9">Hello, guest</span>!
+                <input class="btn btn-outline-success" type="submit" value="Sign Out" style="color:#E5E7E9"/>
             </form>
         </div>
     </div>

@@ -17,18 +17,21 @@
 <div class="container">
     <div th:if="${param.error}">Something went wrong</div>
     <form th:action="@{/register/new}" method="post">
-        <div>
-            <label> Email : <input type="text" name="email"/>
-            </label>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="text" class="form-control" id="email" placeholder="Enter email" name="email">
         </div>
-        <div>
-            <label> Name : <input type="text" name="name"/>
-            </label>
+
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
         </div>
-        <div>
-            <label> Password: <input type="password" name="password"/>
-            </label>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
         </div>
+
         <div>
             <input type="submit" value="Sign In"/>
         </div>

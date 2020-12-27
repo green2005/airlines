@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Properties;
-import java.util.zip.CRC32;
-import java.util.zip.Checksum;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
@@ -28,7 +26,33 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void sendRegistrationEmail(User user) {
+        doSendEmail(user, getRegistrationMessage(user));
+    }
 
+    @Override
+    public void sendRestorePwdEmail(User user) {
+        doSendEmail(user, getRestorePWDMessage(user));
+    }
+
+    private String getRegistrationMessage(User user) {
+        return new StringBuilder("Hello ").append(user.getName()).append("! ")
+                .append("To activate your account press next link: ").append(emailProperties.getDomainHost())
+                .append("/activate?userid=")
+                .append(user.getId())
+                .append("&code=" + user.getCRC())
+                .toString();
+    }
+
+    private String getRestorePWDMessage(User user) {
+        return new StringBuilder("Hello ").append(user.getName()).append("! ")
+                .append("To reset your password press next link: ").append(emailProperties.getDomainHost())
+                .append("/passwordresetlast?userid=")
+                .append(user.getId())
+                .append("&code=" + user.getCRC())
+                .toString();
+    }
+
+    private void doSendEmail(User user, String msg) {
         String to = user.getEmail();
         String from = emailProperties.getDisplayfrom();
 
@@ -58,7 +82,7 @@ public class EmailServiceImpl implements EmailService {
             message.setSubject("Activation link for somewhereairlines.com");
 
             MimeBodyPart mimeBodyPart = new MimeBodyPart();
-            mimeBodyPart.setContent(getMessage(user), "text/html");
+            mimeBodyPart.setContent(msg, "text/html");
 
             Multipart multipart = new MimeMultipart();
             multipart.addBodyPart(mimeBodyPart);
@@ -70,14 +94,5 @@ public class EmailServiceImpl implements EmailService {
             throw new RuntimeException(mex);
         }
 
-    }
-
-    private String getMessage(User user) {
-        return new StringBuilder("Hello ").append(user.getName()).append("! ")
-                .append("To activate your account press next link: ").append(emailProperties.getDomainHost())
-                .append("/activate?userid=")
-                .append(user.getId())
-                .append("&code=" + user.getCRC())
-                .toString();
     }
 }

@@ -28,7 +28,7 @@
         <div class="form-group">
             <div th:if="${param.error}">Invalid username and password.
                 <br>
-                <a th:href="@{/register/reactivate}">Forgot a password?</a>
+                <a th:href="@{/passwordresetfirst}">Forgot a password?</a>
             </div>
             <div th:if="${param.logout}">You have been logged out.</div>
         </div>

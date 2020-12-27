@@ -7,15 +7,12 @@ import by.epamtraining.airlines.repository.UserRepository;
 import by.epamtraining.airlines.service.EmailService;
 import by.epamtraining.airlines.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.ignoreCase;
+import java.util.Optional;
 
 @Service
 public class JPAUserServiceImpl implements UserService {
@@ -50,6 +47,7 @@ public class JPAUserServiceImpl implements UserService {
         cred.setActive(true);
         cred.setPwd(encoder.encode(pwd));
         user.getCredentials().add(cred);
+        cred.setUser(user);
         repository.save(user);
     }
 
@@ -78,6 +76,13 @@ public class JPAUserServiceImpl implements UserService {
     }
 
     @Override
+    public void resetPassword(User user) throws Exception {
+        user.getCredentials().stream().forEach(item -> item.setActive(false));
+        repository.save(user);
+        emailService.sendRestorePwdEmail(user);
+    }
+
+    @Override
     public User getByName(String name) {
         return repository.findByName(name);
     }
@@ -85,5 +90,10 @@ public class JPAUserServiceImpl implements UserService {
     @Override
     public User getByEmail(String email) {
         return repository.findByEmail(email);
+    }
+
+    @Override
+    public Optional<User> getById(Integer id) {
+        return repository.findById(id);
     }
 }
