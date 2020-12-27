@@ -1,0 +1,8 @@
+
+s
+java:S1128
+"QRemove this unused import 'org.springframework.web.bind.annotation.PathVariable'.(¹ûñÅşÿÿÿÿ8©ìÏàé.
+l
+java:S1128"ORemove this unused import 'by.epamtraining.airlines.repository.UserRepository'.(Á÷ º8âÛ¼İé.
+<
+java:S3751"Make this method "public".(Ëˆ•¥üÿÿÿÿ8»´“àé.

@@ -1,0 +1,14 @@
+
+T
+java:S1128"2Remove this unused import 'java.util.Collections'.(¢³ïÓþÿÿÿÿ8Ô»•Þé.
+b
+java:S1128"ERemove this unused import 'by.epamtraining.airlines.domain.UserRole'.(šµú·8Ô»•Þé.
+]
+java:S1128"ARemove this unused import 'by.epamtraining.airlines.domain.User'.(þƒ«
+8Ô»•Þé.
+s
+java:S1128"QRemove this unused import 'org.springframework.core.convert.converter.Converter'.(’µ´×ÿÿÿÿÿ8Ô»•Þé.
+g
+java:S1128"ERemove this unused import 'org.springframework.stereotype.Component'.(Þ÷Ñ¸ÿÿÿÿÿ8Ô»•Þé.
+H
+java:S1128	"+Remove this unused import 'java.util.Date'.(¸…¼ü8Ô»•Þé.

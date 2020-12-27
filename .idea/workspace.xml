@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6355697f-296d-45a5-87b4-47040fdee1a1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../simpleservlet/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../simpleservlet/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../simpleservlet/.idea/sonarlint/issuestore/0/b/0b997cc8936c13439c1edefd81a406b4bd174891" beforeDir="false" afterPath="$PROJECT_DIR$/../simpleservlet/.idea/sonarlint/issuestore/0/b/0b997cc8936c13439c1edefd81a406b4bd174891" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../simpleservlet/.idea/sonarlint/issuestore/1/6/1641da81559272759b52f0628b8f207312e930cb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../simpleservlet/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/../simpleservlet/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../simpleservlet/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../simpleservlet/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../simpleservlet/src/main/java/by/training/MainServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../simpleservlet/src/main/java/by/training/MainServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../simpleservlet/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../simpleservlet/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../simpleservlet/src/main/webapp/nn.jsp" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="HTML4 File" />
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1kA802qQJLd22mykiTiM9fQ5ya5" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML4 File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../4/thymeleafexamples-layouts-master/pom.xml" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RunManager">
+    <configuration name="AppStarter" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="by.epamtraining.airlines.AppStarter" />
+      <module name="airlines" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6355697f-296d-45a5-87b4-47040fdee1a1" name="Default Changelist" comment="" />
+      <created>1605131808756</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1605131808756</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="164" y="0" key="#Project_Structure" timestamp="1605131851146">
+      <screen x="0" y="0" width="1366" height="724" />
+    </state>
+    <state x="164" y="0" key="#Project_Structure/0.0.1366.724@0.0.1366.724" timestamp="1605131851146" />
+    <state x="138" y="17" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607758703313">
+      <screen x="0" y="0" width="1366" height="724" />
+    </state>
+    <state x="138" y="17" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.724@0.0.1366.724" timestamp="1607758703313" />
+    <state x="489" y="70" key="#com.intellij.ide.util.MemberChooser" timestamp="1609018647596">
+      <screen x="0" y="0" width="1366" height="724" />
+    </state>
+    <state x="489" y="70" key="#com.intellij.ide.util.MemberChooser/0.0.1366.724@0.0.1366.724" timestamp="1609018647596" />
+    <state x="413" y="152" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1607758702307">
+      <screen x="0" y="0" width="1366" height="724" />
+    </state>
+    <state x="413" y="152" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1366.724@0.0.1366.724" timestamp="1607758702307" />
+    <state x="471" y="259" width="423" height="215" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1608931108668">
+      <screen x="0" y="0" width="1366" height="724" />
+    </state>
+    <state x="471" y="259" width="423" height="215" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1366.724@0.0.1366.724" timestamp="1608931108668" />
+    <state x="439" y="67" key="#xdebugger.evaluate" timestamp="1609017114628">
+      <screen x="0" y="0" width="1366" height="724" />
+    </state>
+    <state x="439" y="67" key="#xdebugger.evaluate/0.0.1366.724@0.0.1366.724" timestamp="1609017114628" />
+    <state width="416" height="466" key="DebuggerActiveHint" timestamp="1609016891278">
+      <screen x="0" y="0" width="1366" height="724" />
+    </state>
+    <state width="416" height="466" key="DebuggerActiveHint/0.0.1366.724@0.0.1366.724" timestamp="1609016891278" />
+    <state x="464" y="117" key="FileChooserDialogImpl" timestamp="1608147146742">
+      <screen x="0" y="0" width="1366" height="724" />
+    </state>
+    <state x="464" y="117" key="FileChooserDialogImpl/0.0.1366.724@0.0.1366.724" timestamp="1608147146742" />
+    <state width="1324" height="191" key="GridCell.Tab.0.bottom" timestamp="1609054672893">
+      <screen x="0" y="0" width="1366" height="724" />
+    </state>
+    <state width="1324" height="191" key="GridCell.Tab.0.bottom/0.0.1366.724@0.0.1366.724" timestamp="1609054672893" />
+    <state width="1324" height="191" key="GridCell.Tab.0.center" timestamp="1609054672893">
+      <screen x="0" y="0" width="1366" height="724" />
+    </state>
+    <state width="1324" height="191" key="GridCell.Tab.0.center/0.0.1366.724@0.0.1366.724" timestamp="1609054672893" />
+    <state width="1324" height="191" key="GridCell.Tab.0.left" timestamp="1609054672892">
+      <screen x="0" y="0" width="1366" height="724" />
+    </state>
+    <state width="1324" height="191" key="GridCell.Tab.0.left/0.0.1366.724@0.0.1366.724" timestamp="1609054672892" />
+    <state width="1324" height="191" key="GridCell.Tab.0.right" timestamp="1609054672893">
+      <screen x="0" y="0" width="1366" height="724" />
+    </state>
+    <state width="1324" height="191" key="GridCell.Tab.0.right/0.0.1366.724@0.0.1366.724" timestamp="1609054672893" />
+    <state width="1324" height="154" key="GridCell.Tab.1.bottom" timestamp="1609021155636">
+      <screen x="0" y="0" width="1366" height="724" />
+    </state>
+    <state width="1324" height="154" key="GridCell.Tab.1.bottom/0.0.1366.724@0.0.1366.724" timestamp="1609021155636" />
+    <state width="1324" height="154" key="GridCell.Tab.1.center" timestamp="1609021155636">
+      <screen x="0" y="0" width="1366" height="724" />
+    </state>
+    <state width="1324" height="154" key="GridCell.Tab.1.center/0.0.1366.724@0.0.1366.724" timestamp="1609021155636" />
+    <state width="1324" height="154" key="GridCell.Tab.1.left" timestamp="1609021155636">
+      <screen x="0" y="0" width="1366" height="724" />
+    </state>
+    <state width="1324" height="154" key="GridCell.Tab.1.left/0.0.1366.724@0.0.1366.724" timestamp="1609021155636" />
+    <state width="1324" height="154" key="GridCell.Tab.1.right" timestamp="1609021155636">
+      <screen x="0" y="0" width="1366" height="724" />
+    </state>
+    <state width="1324" height="154" key="GridCell.Tab.1.right/0.0.1366.724@0.0.1366.724" timestamp="1609021155636" />
+    <state x="346" y="45" key="search.everywhere.popup" timestamp="1605470244370">
+      <screen x="0" y="0" width="1366" height="724" />
+    </state>
+    <state x="346" y="45" key="search.everywhere.popup/0.0.1366.724@0.0.1366.724" timestamp="1605470244370" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/by/epamtraining/airlines/controller/UserRegistrationController.java</url>
+          <line>27</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/by/epamtraining/airlines/controller/UserRegistrationController.java</url>
+          <line>21</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/by/epamtraining/airlines/service/impl/UserAuthService.java</url>
+          <line>30</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/by/epamtraining/airlines/service/impl/UserAuthService.java</url>
+          <line>42</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

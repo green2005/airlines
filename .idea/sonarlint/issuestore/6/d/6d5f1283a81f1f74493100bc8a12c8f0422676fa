@@ -1,0 +1,9 @@
+
+€
+java:S1128"^Remove this unused import 'org.springframework.security.authentication.AuthenticationManager'.(ğş–şÿÿÿÿ8Å’ƒˆê.
+
+java:S4601"dReorder the URL patterns from most to less specific, the pattern "/home" should occurs before "/**".(ÚµÇ8Æƒ¿‹é.
+u
+java:S1128"SRemove this unused import 'org.springframework.beans.factory.annotation.Autowired'.(¡¸Îùÿÿÿÿ8—†œ‚ê.
+}
+java:S4601"`Reorder the URL patterns from most to less specific, the pattern "/" should occurs before "/**".(ÚµÇ8Æƒ¿‹é.

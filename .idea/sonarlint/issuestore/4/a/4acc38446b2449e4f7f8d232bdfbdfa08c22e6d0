@@ -1,0 +1,19 @@
+
+{
+java:S1128"YRemove this unused import 'org.springframework.security.crypto.password.PasswordEncoder'.(‰¡ßáÿÿÿÿÿ8Ç‡ı†ê.
+°
+java:S1130"’Remove the declaration of thrown exception 'org.springframework.security.core.userdetails.UsernameNotFoundException' which is a runtime exception.(É­½Ô8Ç‡ı†ê.
+T
+java:S3655!"7Call "Optional#isPresent()" before accessing the value.(—ö‘é8Ç‡ı†ê.
+l
+java:S1128"ORemove this unused import 'org.springframework.security.core.userdetails.User'.(–Ä€8Ç‡ı†ê.
+e
+java:S1128"HRemove this unused import 'org.springframework.context.annotation.Bean'.(‚î‰Ş8ŠöŠ‚ê.
+I
+java:S1612!",Replace this lambda with a method reference.(—ö‘é8Ç‡ı†ê.
+ˆ
+java:S1128	"fRemove this unused import 'org.springframework.security.authentication.dao.DaoAuthenticationProvider'.(Ã‚öşÿÿÿÿ8½Ï˜‚ê.
+g
+java:S1128"ERemove this unused import 'org.springframework.stereotype.Component'.(Ş÷Ñ¸ÿÿÿÿÿ8éÛÿé.
+l
+java:S1128"ORemove this unused import 'by.epamtraining.airlines.repository.UserRepository'.(Á÷ º8Ñ¢¨ÿé.

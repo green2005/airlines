@@ -1,0 +1,63 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="commonInfoDropdown" role="button"
+                   data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Common info
+                </a>
+                <div class="dropdown-menu" aria-labelledby="commonInfoDropdown">
+                    <a class="dropdown-item" th:href="@{/airports}">Airports</a>
+                    <a class="dropdown-item" th:href="@{/professions}">Professions</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" th:href="@{/crewTypes}">Crew types</a>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="@{/personnel}">Personnel</a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="flightsDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Flights
+                </a>
+                <div class="dropdown-menu" aria-labelledby="flightsDropdown">
+                    <a class="dropdown-item" th:href="@{/regularFlights}">Regular flight templates</a>
+                    <a class="dropdown-item" th:href="@{/flights}">Flights schedule</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" th:href="@{/flightsPersonnel}">Flights personnel</a>
+                </div>
+            </li>
+
+        </ul>
+
+        <div sec:authorize="!isAuthenticated()">
+            <form class="form-inline my-2 my-lg-0"
+                  th:action="@{/login}" method="get">
+                <span class="label label-default" style="color:#E5E7E9">Hello, guest!</span>
+                <input class="btn btn-link" type="submit" value="Sign In" style="color:#E5E7E9"/>
+            </form>
+        </div>
+
+        <div sec:authorize="isAuthenticated()">
+            <form class="form-inline my-2 my-lg-0"
+                  th:action="@{/logout}" method="post">
+                Hello, <span sec:authentication="principal.username" style="color:red">guest</span>!
+                <input class="btn btn-outline-success" type="submit" value="Sign Out"/>
+            </form>
+        </div>
+    </div>
+</nav>

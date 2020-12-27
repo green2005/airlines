@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+
+<link rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous">
+
+<body>
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Shortname</th>
+        <th scope="col">Fullname</th>
+        <th scope="col">Lat</th>
+        <th scope="col">Lon</th>
+    </tr>
+    </thead>
+
+    <tr th:each="airport : ${airports}">
+        <td th:text="${airport.id}"/>
+        <td th:text="${airport.shortName}"/>
+        <td th:text="${airport.fullName}"/>
+        <td th:text="${airport.lat}"/>
+        <td th:text="${airport.lon}"/>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,10 @@
+
+m
+java:S1128"KRemove this unused import 'org.springframework.data.domain.ExampleMatcher'.(¯û¸ûÿÿÿÿ8ÄÓ±†ê.
+f
+java:S1128
+"DRemove this unused import 'org.springframework.data.domain.Example'.(³˜œÍüÿÿÿÿ8ÄÓ±†ê.
+Z
+java:S2589F"8Remove this expression which always evaluates to "false"(Ë½²ıÿÿÿÿ8ü›åÿé.
+Y
+java:S3655'"7Call "Optional#isPresent()" before accessing the value.(³§˜ùÿÿÿÿ8“‰ä‚ê.
