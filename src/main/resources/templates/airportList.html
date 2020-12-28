@@ -1,16 +1,18 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <th:block th:insert="fragments/head.html :: js"/>
+    <link th:href="@{/styles/footerfix.css}" rel="stylesheet"/>
 </head>
 
-<link rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous">
-
 <body>
+<th:block th:insert="fragments/navbar.html" ::navbar/>
+<div class="container">
+    airports page
+</div>
+<footer th:insert="fragments/footer.html :: footer"></footer>
+
 <table class="table">
     <thead class="thead-dark">
     <tr>
