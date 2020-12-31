@@ -3,16 +3,107 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <th:block th:insert="fragments/head.html :: js"/>
+    <th:block th:insert="fragments/navbar.html" ::navbar/>
     <link th:href="@{/styles/footerfix.css}" rel="stylesheet"/>
+    <style>
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   text-align: center;
+}
+
+
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--    <link th:href="@{/styles/footerfix.css}" rel="stylesheet"/>-->
 </head>
 
 <body>
-<th:block th:insert="fragments/navbar.html" ::navbar/>
+
+<p th:text="' ' + ${airportcount} + '!'"/>
+
+<br>
+<br>
+
 <div class="container">
     airports page
 </div>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th style="width: 16.66%" scope="col">#</th>
+        <th style="width: 22%" scope="col">ShortName</th>
+        <th style="width: 47%" scope="col">FullName</th>
+        <th style="width: 6.16%" scope="col">Lat</th>
+        <th style="width: 6.16%" scope="col">Lon</th>
+        <th style="width: 2%"></th>
+        <th style="width: 2%"></th>
+    </tr>
+    </thead>
+    <tbody>
+
+
+    <tr th:each="airport : ${airports}">
+        <td th:text="${airport.id}"/>
+        <td th:text="${airport.shortName}"/>
+        <td th:text="${airport.fullName}"/>
+        <td>1</td>
+        <td>2</td>
+        <!--  <td th:text="${airport.lat}"/>
+        <a th:href="@{/register}">Register new user</a>
+          <td th:text="${airport.lon}"/> -->
+        <td>
+            <form action="#" th:action="@{'/airports/edit/{id}'(id=${airport.id})}" th:method="get">
+                <button type="submit" data-toggle="modal" data-target="#edit" data-uid="1"
+                        class="update btn btn-warning btn-sm"><span class="glyphicon glyphicon-pencil"></span></button>
+            </form>
+            <!--
+            <button type="button" data-toggle="modal" data-target="#edit" data-uid="1"
+                    class="update btn btn-warning btn-sm"><span class="glyphicon glyphicon-pencil"></span></button>-->
+        </td>
+        <td>
+            <form action="#" th:action="@{'/airports/delete/{id}'(id=${airport.id})}" th:method="delete">
+                <button type="submit" data-toggle="modal" data-target="#delete" data-uid="1"
+                        class="delete btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<footer>
+    <p>Footer</p>
+    <div class="container">
+
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</footer>
+
 <footer th:insert="fragments/footer.html :: footer"></footer>
 
+<!--
 <table class="table">
     <thead class="thead-dark">
     <tr>
@@ -28,9 +119,9 @@
         <td th:text="${airport.id}"/>
         <td th:text="${airport.shortName}"/>
         <td th:text="${airport.fullName}"/>
-        <td th:text="${airport.lat}"/>
-        <td th:text="${airport.lon}"/>
+        <td 0/>
+        <td 0/>
     </tr>
-</table>
+</table>-->
 </body>
 </html>

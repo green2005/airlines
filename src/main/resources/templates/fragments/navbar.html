@@ -48,7 +48,7 @@
         </ul>
 
         <div sec:authorize="!isAuthenticated()">
-            <form class="form-inline my-2 my-lg-0"
+            <form class="form-inline my-2 my-lg-0" dir="rtl"
                   th:action="@{/login}" method="get">
                 <span class="label label-default" style="color:#E5E7E9">Hello, guest!</span>
                 <input class="btn btn-link" type="submit" value="Sign In" style="color:#E5E7E9"/>
@@ -56,7 +56,7 @@
         </div>
 
         <div sec:authorize="isAuthenticated()">
-            <form class="form-inline my-2 my-lg-0"
+            <form class="form-inline my-2 my-lg-0"  dir="rtl"
                   th:action="@{/logout}" method="post">
                 <span sec:authentication="principal.username" style="color:#E5E7E9">Hello, guest</span>!
                 <input class="btn btn-outline-success" type="submit" value="Sign Out" style="color:#E5E7E9"/>

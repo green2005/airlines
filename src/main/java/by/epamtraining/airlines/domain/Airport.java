@@ -20,11 +20,9 @@ public class Airport {
     @Size(min = 2, max = 255, message = "Incorrect airport name")
     private String fullName;
 
-    @Nullable
-    private double lat;
+    private String lat;
 
-    @Nullable
-    private double lon;
+    private String lon;
 
 
     public int getId() {
