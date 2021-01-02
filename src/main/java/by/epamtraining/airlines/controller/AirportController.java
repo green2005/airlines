@@ -21,9 +21,8 @@ public class AirportController {
 
     @GetMapping(value = {"/airports", "/airports/{n}"})
     public String getAirports(@PathVariable(required = false, name = "n") Integer n, Model model) {
-        if (n == null) {
-            n = 0;
-        }
+        long recordCount = airportService.getAirportsCount();
+        n = NavPageLink.getCurrentPageNo(n, recordCount);
         List<Airport> airports = airportService.getAirports(n, NavPageLink.RECORDS_PER_PAGE);
         model.addAttribute("airports", airports);
         long qty = airportService.getAirportsCount();

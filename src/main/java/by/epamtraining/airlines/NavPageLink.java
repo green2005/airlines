@@ -12,9 +12,27 @@ public class NavPageLink {
 
     public static final int RECORDS_PER_PAGE = 10;
 
+    public static int getPageCount(long recordCount) {
+        return (int) Math.ceil((double) recordCount / RECORDS_PER_PAGE);
+    }
+
+    public static int getCurrentPageNo(Integer pageNo, long recordCount) {
+        if (pageNo == null) {
+            pageNo = 0;
+        }
+        int pageCount = NavPageLink.getPageCount(recordCount);
+        if (pageNo >= pageCount) {
+            pageNo = pageCount - 1;
+        }
+        if (pageNo < 0) {
+            pageNo = 0;
+        }
+        return pageNo;
+    }
+
     public static List<NavPageLink> getPageLinks(long recordCount, int currentPage, String urlPart) {
         List<NavPageLink> pages = new ArrayList<>();
-        int totalPageCount = (int) Math.ceil((double) recordCount / RECORDS_PER_PAGE);
+        int totalPageCount = getPageCount(recordCount);
         if (totalPageCount <= 1) {
             return pages;
         }
