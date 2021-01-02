@@ -10,6 +10,6 @@ public interface AirportService {
 
     List<Airport> getAirports(Integer pageN, Integer pageSize);
     long getAirportsCount();
-
+    void deleteById(int id);
     void setAirports(List<Airport> airports);
 }

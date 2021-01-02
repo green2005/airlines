@@ -43,6 +43,11 @@ public class AirportServiceImpl implements AirportService {
     }
 
     @Override
+    public void deleteById(int id) {
+        airportRepository.deleteById(id);
+    }
+
+    @Override
     public void setAirports(List<Airport> airports) {
         airportRepository.saveAll(airports);
     }
