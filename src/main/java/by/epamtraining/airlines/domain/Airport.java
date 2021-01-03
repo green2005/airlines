@@ -20,10 +20,13 @@ public class Airport {
     @Size(min = 2, max = 255, message = "Incorrect airport name")
     private String fullName;
 
-    private String lat;
+    private String country;
 
-    private String lon;
+    private String city;
 
+    private String slat;
+
+    private String slon;
 
     public int getId() {
         return id;
@@ -43,5 +46,37 @@ public class Airport {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getSlat() {
+        return slat;
+    }
+
+    public void setSlat(String slat) {
+        this.slat = slat;
+    }
+
+    public String getSlon() {
+        return slon;
+    }
+
+    public void setSlon(String slon) {
+        this.slon = slon;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }
