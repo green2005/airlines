@@ -26,6 +26,7 @@
 # since they will be recreated, and may cause churn.  Uncomment if using
 # auto-import.
  .idea/ 
+ .idea/sonarlint
  .idea/artifacts
  .idea/compiler.xml
  .idea/jarRepositories.xml
@@ -69,3 +70,4 @@ fabric.properties
 
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
+.idea/sonarlint/issuestore/0/a/0a14f14fbb9332f0bf0c90b70607120f6d70212b

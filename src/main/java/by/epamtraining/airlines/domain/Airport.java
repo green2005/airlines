@@ -79,4 +79,8 @@ public class Airport {
     public void setCity(String city) {
         this.city = city;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

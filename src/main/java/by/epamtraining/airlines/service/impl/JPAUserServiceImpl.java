@@ -2,7 +2,7 @@ package by.epamtraining.airlines.service.impl;
 
 import by.epamtraining.airlines.domain.User;
 import by.epamtraining.airlines.domain.UserCredentials;
-import by.epamtraining.airlines.exceptions.UserNotFoundException;
+import by.epamtraining.airlines.exceptions.DomainNotFoundException;
 import by.epamtraining.airlines.repository.UserRepository;
 import by.epamtraining.airlines.service.EmailService;
 import by.epamtraining.airlines.service.UserService;
@@ -65,11 +65,11 @@ public class JPAUserServiceImpl implements UserService {
     public void activateUser(String userId, String code) throws Exception {
         try {
             User usr = repository.getOne(Integer.parseInt(userId));
-            if ((usr == null) || (!code.equalsIgnoreCase(usr.getCRC()))) throw new UserNotFoundException();
+            if ((usr == null) || (!code.equalsIgnoreCase(usr.getCRC()))) throw new DomainNotFoundException();
             usr.setAccountActivated(true);
             repository.save(usr);
         } catch (Exception e) {
-            Exception userException = new UserNotFoundException();
+            Exception userException = new DomainNotFoundException();
             userException.addSuppressed(e);
             throw userException;
         }

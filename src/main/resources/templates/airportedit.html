@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <th:block th:insert="fragments/head.html :: js"/>
+    <th:block th:insert="fragments/navbar.html" ::navbar/>
+    <link th:href="@{/styles/footerfix.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    airport edit
+</div>
+
+<div class="container">
+    <form th:action="@{'/airports/edit/{pageno}/{id}'(pageno=${pageno},id=${airport.id})}" method="post">
+
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="country">Country:</label>
+                    <input type="text" class="form-control" id="country" th:field="*{airport.country}">
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="city">City:</label>
+                    <input type="text" class="form-control" id="city" th:field="*{airport.city}">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="fullname">Airport fullname:</label>
+                    <input type="text" class="form-control" id="fullname" th:field="*{airport.fullName}">
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="iata">IATA:</label>
+                    <input type="text" class="form-control" id="iata" maxlength="4" th:field="*{airport.shortName}">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="lat">LAT:</label>
+                    <input type="number" class="form-control" id="lat" th:field="*{airport.slat}">
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="lon">LON:</label>
+                    <input type="number" class="form-control" id="lon" th:field="*{airport.slon}">
+                </div>
+            </div>
+            <input type="hidden" class="form-control" id="id" th:field="*{airport.id}">
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4">
+                <button type="submit" class="btn btn-default">Save changes</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+
+<footer>
+    <th:block th:insert="fragments/footer.html" ::footer/>
+
+</footer>
+</body>
+</html>

@@ -2,6 +2,7 @@ package by.epamtraining.airlines.controller;
 
 import by.epamtraining.airlines.NavPageLink;
 import by.epamtraining.airlines.domain.Airport;
+import by.epamtraining.airlines.exceptions.DomainNotFoundException;
 import by.epamtraining.airlines.service.AirportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,6 +41,20 @@ public class AirportController {
         n++;
         n = NavPageLink.getCurrentPageNo(n, recordCount);
         return getPage(n, recordCount, model);
+    }
+
+    @GetMapping(value = {"/airports/edit/{pageno}/{id}"})
+    public String getAirportsEdit(@PathVariable Integer pageno, @PathVariable Integer id, Model model) {
+        Airport airport = airportService.getById(id).orElseThrow(DomainNotFoundException::new);
+        model.addAttribute("pageno", pageno);
+        model.addAttribute("airport", airport);
+        return "airportedit";
+    }
+
+    @PostMapping(value = {"/airports/edit/{pageno}/{id}"})
+    public String postAirportsEdit(@PathVariable Integer pageno, @PathVariable Integer id, Airport airport) {
+        airportService.save(airport);
+        return "redirect:/airports/".concat(Integer.toString(pageno));
     }
 
     private String getPage(Integer pageNo, long recordCount, Model model) {

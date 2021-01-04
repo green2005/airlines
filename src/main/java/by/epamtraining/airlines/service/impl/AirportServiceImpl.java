@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AirportServiceImpl implements AirportService {
@@ -35,6 +36,11 @@ public class AirportServiceImpl implements AirportService {
         return airports;
     }
 
+    @Override
+    public Optional<Airport> getById(int id) {
+        return airportRepository.findById(id);
+    }
+
     //long countByAreaCode(String code);
 
     @Override
@@ -50,5 +56,10 @@ public class AirportServiceImpl implements AirportService {
     @Override
     public void setAirports(List<Airport> airports) {
         airportRepository.saveAll(airports);
+    }
+
+    @Override
+    public void save(Airport airport) {
+        airportRepository.save(airport);
     }
 }
