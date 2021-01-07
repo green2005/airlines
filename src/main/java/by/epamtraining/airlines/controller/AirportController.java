@@ -49,7 +49,7 @@ public class AirportController {
         return "airportlist";
     }
 
-    @PostMapping(value = {"/airports/edit/{pageno}/{id}", "/airports/edit"})
+    @PostMapping(value = {"/airports/edit/{pageno}/{id}", "/airports/edit", "/airports/edit/{pageno}"})
     public String getAirportsEdit(@PathVariable(required = false) Integer pageno,
                                   @PathVariable(required = false) Integer id,
                                   @RequestParam(required = false, name = "sortfield", defaultValue = "shortName") String sortfield,
@@ -90,7 +90,7 @@ public class AirportController {
                                 @PathVariable Integer id,
                                 @RequestParam(required = false, name = "sortfield", defaultValue = "shortName") String sortfield,
                                 @RequestParam(required = false, name = "sortasc", defaultValue = "true") Boolean orderAsc
-                                ) {
+    ) {
         if (pageno == null) {
             pageno = 1;
         }

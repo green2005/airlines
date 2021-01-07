@@ -10,11 +10,13 @@
 </head>
 <body>
 
-<div class="container">
-    airports page
-</div>
 
 <div style="margin:24px">
+    <form th:action="${'/airports/edit/'+{pageno}+'/?sortfield='+{sortfield}+'&sortasc='+{sortasc}}"
+          th:method="post">
+        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus">Add new</span></button>
+    </form>
+
     <table class="table table-striped">
         <thead>
         <tr>
