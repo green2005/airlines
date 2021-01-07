@@ -4,6 +4,7 @@ import by.epamtraining.airlines.domain.Airport;
 import by.epamtraining.airlines.repository.AirportRepository;
 import by.epamtraining.airlines.service.AirportService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -29,11 +30,15 @@ public class AirportServiceImpl implements AirportService {
     }
 
     @Override
-    public List<Airport> getAirports(Integer pageN, Integer pageSize) {
-        Pageable page = PageRequest.of(pageN, pageSize, Sort.by("fullName"));
-        List<Airport> airports = new ArrayList<>();
-        airportRepository.findAll(page).forEach(item -> airports.add(item));
-        return airports;
+    public Page<Airport> getAirports(Integer pageN, Integer pageSize, String sortField, Boolean sortAsc) {
+        Sort sort;
+        if (sortAsc) {
+            sort = Sort.by(sortField).ascending();
+        } else {
+            sort = Sort.by(sortField).descending();
+        }
+        Pageable pageable = PageRequest.of(pageN - 1, pageSize, sort);
+        return airportRepository.findAll(pageable);
     }
 
     @Override
@@ -41,7 +46,6 @@ public class AirportServiceImpl implements AirportService {
         return airportRepository.findById(id);
     }
 
-    //long countByAreaCode(String code);
 
     @Override
     public long getAirportsCount() {

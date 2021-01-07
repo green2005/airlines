@@ -11,12 +11,8 @@
 <body>
 
 <div class="container">
-    airport edit
-</div>
-
-<div class="container">
-    <form th:action="@{'/airports/edit/{pageno}/{id}'(pageno=${pageno},id=${airport.id})}" method="post">
-
+    <form th:action="${'/airports/save/'+{pageno}+'/?sortfield='+{sortfield}+'&sortasc='+{sortasc}}"
+          method="post">
         <div class="row">
             <div class="col-sm-1"></div>
             <div class="col-sm-4">

@@ -10,7 +10,7 @@ public class NavPageLink {
     private boolean active;
     private boolean selected;
 
-    public static final int RECORDS_PER_PAGE = 10;
+    public static final int RECORDS_PER_PAGE = 7;
 
     public static int getPageCount(long recordCount) {
         return (int) Math.ceil((double) recordCount / RECORDS_PER_PAGE);
@@ -18,7 +18,7 @@ public class NavPageLink {
 
     public static int getCurrentPageNo(Integer pageNo, long recordCount) {
         if (pageNo == null) {
-            pageNo = 0;
+            pageNo = 1;
         }
         int pageCount = NavPageLink.getPageCount(recordCount);
         if (pageNo >= pageCount) {

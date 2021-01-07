@@ -14,83 +14,161 @@
     airports page
 </div>
 
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th style="width: 16.66%" scope="col">Country</th>
-        <th style="width: 16.66%" scope="col">City</th>
-        <th style="width: 27%" scope="col">IATA</th>
-        <th style="width: 27%" scope="col">FullName</th>
-        <th style="width: 12.16%" scope="col">Link</th>
-        <th style="width: 2%"></th>
-        <th style="width: 2%"></th>
-    </tr>
-    </thead>
-    <tbody>
+<div style="margin:24px">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th style="width: 16.66%" scope="col">
+                <div th:if="${sortfield=='country'}" th:remove="tag">
+                    <div th:if="${sortasc==true}" th:remove="tag">
+                        <a th:href="@{/airports/{page}/ (page=1 ,sortfield=country,sortasc=false)}" title="Sort">
+                            Country
+                            <span class="dropup">
+                            <span class="caret">
+                            </span>
+	                        </span>
+                        </a>
+                    </div>
+                    <div th:if="${sortasc!=true}" th:remove="tag">
+                        <a th:href="@{/airports/{page}/ (page=1 ,sortfield=country,sortasc=true)}" title="Sort">
+                            Country
+                            <span class="caret">
+	                        </span>
+                        </a>
+                    </div>
+                </div>
+                <div th:unless="${sortfield=='country'}" th:remove="tag">
+                    <a th:href="@{/airports/{page}/ (page=1 ,sortfield=country,sortasc=true)}" title="Sort">
+                        Country
+                    </a>
+                </div>
+            </th>
+            <th style="width: 16.66%" scope="col">
+                <div th:if="${sortfield=='city'}" th:remove="tag">
+                    <div th:if="${sortasc==true}" th:remove="tag">
+                        <a th:href="@{/airports/{page}/ (page=1 ,sortfield=city,sortasc=false)}" title="Sort">
+                            City
+                            <span class="dropup">
+                            <span class="caret">
+                            </span>
+	                        </span>
+                        </a>
+                    </div>
+                    <div th:if="${sortasc!=true}" th:remove="tag">
+                        <a th:href="@{/airports/{page}/ (page=1 ,sortfield=city,sortasc=true)}" title="Sort">
+                            City
+                            <span class="caret">
+	                        </span>
+                        </a>
+                    </div>
+                </div>
+                <div th:unless="${sortfield=='city'}" th:remove="tag">
+                    <a th:href="@{/airports/{page}/ (page=1 ,sortfield=city,sortasc=true)}" title="Sort">
+                        City
+                    </a>
+                </div>
+            </th>
+            <th style="width: 27%" scope="col">
+                <div th:if="${sortfield=='shortName'}" th:remove="tag">
+                    <div th:if="${sortasc==true}" th:remove="tag">
+                        <a th:href="@{/airports/{page}/ (page=1 ,sortfield=shortName,sortasc=false)}" title="Sort">
+                            IATA
+                            <span class="dropup">
+                            <span class="caret">
+                            </span>
+	                        </span>
+                        </a>
+                    </div>
+                    <div th:if="${sortasc!=true}" th:remove="tag">
+                        <a th:href="@{/airports/{page}/ (page=1 ,sortfield=shortName,sortasc=true)}" title="Sort">
+                            IATA
+                            <span class="caret">
+	                        </span>
+                        </a>
+                    </div>
+                </div>
+                <div th:unless="${sortfield=='shortName'}" th:remove="tag">
+                    <a th:href="@{/airports/{page}/ (page=1 ,sortfield=shortName,sortasc=true)}" title="Sort">
+                        IATA
+                    </a>
+                </div>
+            </th>
+            <th style="width: 27%" scope="col">
+                <div th:if="${sortfield=='fullName'}" th:remove="tag">
+                    <div th:if="${sortasc==true}" th:remove="tag">
+                        <a th:href="@{/airports/{page}/ (page=1 ,sortfield=fullName,sortasc=false)}" title="Sort">
+                            FullName
+                            <span class="dropup">
+                            <span class="caret">
+                            </span>
+	                        </span>
+                        </a>
+                    </div>
+                    <div th:if="${sortasc!=true}" th:remove="tag">
+                        <a th:href="@{/airports/{page}/ (page=1 ,sortfield=fullName,sortasc=true)}" title="Sort">
+                            FullName
+                            <span class="caret">
+	                        </span>
+                        </a>
+                    </div>
+                </div>
+                <div th:unless="${sortfield=='fullName'}" th:remove="tag">
+                    <a th:href="@{/airports/{page}/ (page=1 ,sortfield=fullName,sortasc=true)}" title="Sort">
+                        FullName
+                    </a>
+                </div>
+            </th>
+            <th style="width: 12.16%" scope="col">Link</th>
+            <th style="width: 2%"></th>
+            <th style="width: 2%"></th>
+        </tr>
+        </thead>
+        <tbody>
 
-    <tr th:each="airport : ${airports}">
-        <td th:text="${airport.country}"/>
-        <td th:text="${airport.city}"/>
-        <td th:text="${airport.shortName}"/>
-        <td th:text="${airport.fullName}"/>
-        <td>
-            <a th:href="@{https://maps.google.com/(q=${airport.slat+','+airport.slon},ll=${airport.slat+','+airport.slon},z=11)}"/>
-            <div th:remove="tag" th:text="${airport.slat+','+airport.slon}">
-            </div>
-            </a>
-        </td>
-        <td>
-            <form action="#" th:action="@{'/airports/edit/{pageno}/{id}'(pageno=${pageno},id=${airport.id})}" th:method="get">
-                <button type="submit" data-toggle="modal" data-target="#edit" data-uid="1"
-                        class="update btn btn-warning btn-sm"><span class="glyphicon glyphicon-pencil"></span></button>
-            </form>
-        </td>
-        <td>
-            <form action="#" th:action="@{'/airports/delete/{pageno}/{id}'(pageno=${pageno},id=${airport.id})}"
-                  th:method="post">
-                <button type="submit" data-toggle="modal" data-target="#delete" data-uid="1"
-                        class="delete btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></button>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
+        <tr th:each="airport : ${airports}">
+            <td th:text="${airport.country}"/>
+            <td th:text="${airport.city}"/>
+            <td th:text="${airport.shortName}"/>
+            <td th:text="${airport.fullName}"/>
+            <td>
+                <a th:href="@{https://maps.google.com/(q=${airport.slat+','+airport.slon},ll=${airport.slat+','+airport.slon},z=11)}"/>
+                <div th:remove="tag" th:text="${airport.slat+','+airport.slon}">
+                </div>
+                </a>
+            </td>
+            <td>
+
+                <form th:action="${'/airports/edit/'+{pageno}+'/'+{airport.id}+'/?sortfield='+{sortfield}+'&sortasc='+{sortasc}}"
+                      th:method="post">
+                    <button type="submit" data-toggle="modal"
+                            data-target="#edit" data-uid="1"
+                            class="update btn btn-warning btn-sm"
+                    ><span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                </form>
+            </td>
+            <td>
+                <form action="#"
+                      th:action="${'/airports/delete/'+{pageno}+'/'+{airport.id}+'/?sortfield='+{sortfield}+'&sortasc='+{sortasc}}"
+                      th:method="post">
+                    <button type="submit" data-toggle="modal" data-target="#delete" data-uid="1"
+                            class="delete btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 <footer>
-    <div class="container">
-        <nav aria-label="Page navigation">
-            <ul class="pagination">
-                <li class="page-item">
-                    <a class="page-link" th:href="@{/airports/prev/{page}(page=${pageno})}" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                </li>
-                <li th:each="page : ${navpages}" th:remove="tag">
-                    <ul th:if="${page.selected}" th:remove="tag">
-                        <li class="page-item active"><a class="page-link"
-                                                        th:href="@{/airports/{page}(page=${page.pageNo})}">
-                            <span th:text="${page.name}" th:remove="tag"></span>
-                        </a>
-                    </ul>
-                    <ul th:if="${!page.selected}" th:remove="tag">
-                        <li class="page-item"><a class="page-link" th:href="@{/airports/{page}(page=${page.pageNo})}">
-                            <span th:text="${page.name}" th:remove="tag"></span>
-                        </a>
-                    </ul>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" th:href="@{/airports/next/{page}(page=${pageno})}" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+
+    <div th:with="pathpart=airports" th:remove="tag">
+        <th:block th:insert="fragments/pagenavigationfooter.html" ::footer/>
     </div>
 
+    <br>
     <th:block th:insert="fragments/footer.html" ::footer/>
-
 </footer>
 </body>
 </html>
