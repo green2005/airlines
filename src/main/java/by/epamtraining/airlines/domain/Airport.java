@@ -2,10 +2,7 @@ package by.epamtraining.airlines.domain;
 
 import org.springframework.lang.Nullable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -14,9 +11,12 @@ public class Airport {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+
     @Size(min = 2, max = 20, message = "Incorrect airport shortName")
+    @Column(unique = true)
     private String shortName;
 
+    @Column(unique = true)
     @Size(min = 2, max = 255, message = "Incorrect airport name")
     private String fullName;
 

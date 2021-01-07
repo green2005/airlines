@@ -8,14 +8,21 @@ import org.attoparser.util.TextUtil;
 import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.FlashMap;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
+import org.springframework.web.servlet.view.RedirectView;
 import org.thymeleaf.util.TextUtils;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -49,7 +56,7 @@ public class AirportController {
         return "airportlist";
     }
 
-    @PostMapping(value = {"/airports/edit/{pageno}/{id}", "/airports/edit", "/airports/edit/{pageno}"})
+    @GetMapping(value = {"/airports/edit/{pageno}/{id}", "/airports/edit", "/airports/edit/{pageno}"})
     public String getAirportsEdit(@PathVariable(required = false) Integer pageno,
                                   @PathVariable(required = false) Integer id,
                                   @RequestParam(required = false, name = "sortfield", defaultValue = "shortName") String sortfield,
@@ -71,11 +78,11 @@ public class AirportController {
         return "airportedit";
     }
 
-    @PostMapping(value = {"/airports/save/{pageno}", "/airports/save"})
+    @PostMapping(value = {"/airports/edit/{pageno}", "/airports/edit"})
     public String postAirportsEdit(@PathVariable(required = false) Integer pageno,
                                    @RequestParam(required = false, name = "sortfield", defaultValue = "shortName") String sortfield,
                                    @RequestParam(required = false, name = "sortasc", defaultValue = "true") Boolean orderAsc,
-                                   Airport airport) {
+                                   @Valid Airport airport) {
         if (pageno == null) {
             pageno = 1;
         }
@@ -98,5 +105,26 @@ public class AirportController {
         return "redirect:/airports/".
                 concat(Integer.toString(pageno)).
                 concat(String.format("/?sortfield=%s&sortasc=%b", sortfield, orderAsc));
+    }
+
+    @ExceptionHandler(org.springframework.dao.DataIntegrityViolationException.class)
+    public ModelAndView errorHandler(HttpServletRequest request, org.springframework.dao.DataIntegrityViolationException e
+    ) {
+        ModelAndView model = new ModelAndView("airportedit");
+        Airport airport = new Airport();
+        model.addObject("sortfield", request.getParameter("sortfield"));
+        model.addObject("sortasc", request.getParameter("sortasc"));
+        airport.setSlat(request.getParameter("slat"));
+        airport.setSlon(request.getParameter("slon"));
+        airport.setCountry(request.getParameter("country"));
+        airport.setFullName(request.getParameter("fullName"));
+        airport.setShortName(request.getParameter("shortName"));
+        airport.setCity(request.getParameter("city"));
+        if ((request.getParameter("id") != null) && (!"0".equals(request.getParameter("id")))) {
+            airport.setId(Integer.parseInt(request.getParameter("id")));
+        }
+        model.addObject("airport", airport);
+        model.addObject("exception", e.getMostSpecificCause().getMessage());
+        return model;
     }
 }

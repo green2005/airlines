@@ -10,8 +10,15 @@
 </head>
 <body>
 
+<div th:if="${exception!=null}" th:remove="tag">
+    <div class="alert alert-warning" role="alert">
+        error:
+        <p th:text="${exception}"></p>
+    </div>
+</div>
+
 <div class="container">
-    <form th:action="${'/airports/save/'+{pageno}+'/?sortfield='+{sortfield}+'&sortasc='+{sortasc}}"
+    <form th:action="${'/airports/edit/'+{pageno}+'/?sortfield='+{sortfield}+'&sortasc='+{sortasc}}"
           method="post">
         <div class="row">
             <div class="col-sm-1"></div>

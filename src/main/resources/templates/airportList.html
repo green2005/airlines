@@ -13,7 +13,7 @@
 
 <div style="margin:24px">
     <form th:action="${'/airports/edit/'+{pageno}+'/?sortfield='+{sortfield}+'&sortasc='+{sortasc}}"
-          th:method="post">
+          th:method="get">
         <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus">Add new</span></button>
     </form>
 
@@ -141,7 +141,7 @@
             <td>
 
                 <form th:action="${'/airports/edit/'+{pageno}+'/'+{airport.id}+'/?sortfield='+{sortfield}+'&sortasc='+{sortasc}}"
-                      th:method="post">
+                      th:method="get">
                     <button type="submit" data-toggle="modal"
                             data-target="#edit" data-uid="1"
                             class="update btn btn-warning btn-sm"
