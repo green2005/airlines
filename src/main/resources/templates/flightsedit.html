@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <th:block th:insert="fragments/head.html :: js"/>
+    <th:block th:insert="fragments/navbar.html" ::navbar/>
+    <link th:href="@{/styles/footerfix.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div th:if="${exception!=null}" th:remove="tag">
+    <div class="alert alert-warning" role="alert">
+        error:
+        <p th:text="${exception}"></p>
+    </div>
+</div>
+
+<div class="container">
+    <form th:action="${'/flights/edit/'+{pageno}+'/?sortfield='+{sortfield}+'&sortasc='+{sortasc}}"
+          method="post">
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="deptime">Departure time:</label>
+                    <input class="form-control" type="date" id="deptime" th:field="*{flight.departureTime}">
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="desttime">Destination time:</label>
+                    <input class="form-control" type="date" id="desttime" th:field="*{flight.destTime}">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-save">Save changes</i></button>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+
+<footer>
+    <th:block th:insert="fragments/footer.html" ::footer/>
+
+</footer>
+</body>
+</html>

@@ -137,10 +137,7 @@
             <td th:text="${person.profession.name+' '+person.profession.rank}"/>
 
             <div th:if="${person.birthDate!=null}" th:remove="tag">
-                <!--<td th:text="${person.birthDate}"></td> -->
                 <td th:text="${#dates.format(person.birthDate, 'yyyy-MM-dd')}"></td>
-
-                <!--<td th:text="${#dates.format(person.birthDate, 'dd-MM-yyyy')}"></td> -->
             </div>
             <div th:unless="${person.birthDate!=null}" th:remove="tag">
                 <td></td>

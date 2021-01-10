@@ -3,6 +3,7 @@ package by.epamtraining.airlines.domain;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(uniqueConstraints = {
@@ -22,6 +23,10 @@ public class Personnel {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "profession_id")
     Profession profession;
+
+    @ManyToMany(mappedBy = "flightPersonnel", fetch = FetchType.LAZY)
+    List<Flights> flightsPersonnelList;
+
 
     private Date birthDate;
 

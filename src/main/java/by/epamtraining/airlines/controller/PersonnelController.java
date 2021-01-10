@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -48,7 +49,7 @@ public class PersonnelController {
         }
         Page<Personnel> personsPage = personnelService.getPersonnel(n, RECORDS_PER_PAGE, sortfield, orderAsc);
         int totalPageqty = personsPage.getTotalPages();
-        if (n > totalPageqty) {
+        if ((n > totalPageqty) && (totalPageqty > 0)) {
             n = totalPageqty;
             personsPage = personnelService.getPersonnel(n, RECORDS_PER_PAGE, sortfield, orderAsc);
         }
@@ -121,11 +122,11 @@ public class PersonnelController {
                 concat(String.format("/?sortfield=%s&sortasc=%b", sortfield, orderAsc));
     }
 
-        @InitBinder
-        public void initBinder(WebDataBinder binder) {
-            CustomDateEditor editor = new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true);
-            binder.registerCustomEditor(Date.class, editor);
-        }
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        CustomDateEditor editor = new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true);
+        binder.registerCustomEditor(Date.class, editor);
+    }
 
     @ExceptionHandler({org.springframework.dao.DataIntegrityViolationException.class,
             IllegalArgumentException.class
@@ -140,15 +141,21 @@ public class PersonnelController {
         model.addObject("sortasc", request.getParameter("sortasc"));
         personnel.setFirstName(request.getParameter("firstName"));
         personnel.setLastName(request.getParameter("lastName"));
-        if ((request.getParameter("birthDate") != null) && (!request.getParameter("birthDate").equals(""))) {
+        if (request.getParameter("birthDate") != null) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             try {
-                Date d = sdf.parse(request.getParameter("birthDate"));
-                personnel.setBirthDate(d);
-            } catch (Exception dateException) {
+                personnel.setBirthDate(sdf.parse(request.getParameter("birthDate")));
+            } catch (ParseException parseException) {
             }
         }
+        if (request.getParameter("profession.id") != null) {
+            int id = Integer.parseInt(request.getParameter("profession.id"));
+            Profession profession = professionService.getProfessionById(id).orElseThrow(() ->
+                    new IllegalArgumentException("Profession id not found:" + id));
+            personnel.setProfession(profession);
+        }
 
+        model.addObject("professions", professionService.getProfessions());
 
         if ((request.getParameter("id") != null) && (!"0".equals(request.getParameter("id")))) {
             personnel.setId(Integer.parseInt(request.getParameter("id")));

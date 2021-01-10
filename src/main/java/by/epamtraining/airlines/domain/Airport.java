@@ -1,9 +1,8 @@
 package by.epamtraining.airlines.domain;
 
-import org.springframework.lang.Nullable;
-
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 public class Airport {
@@ -27,6 +26,12 @@ public class Airport {
     private String slat;
 
     private String slon;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "destAirport")
+    private List<Flights> flightsDest;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "departureAirport")
+    private List<Flights> flightsDeparture;
 
     public int getId() {
         return id;

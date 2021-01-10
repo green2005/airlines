@@ -1,10 +1,9 @@
 package by.epamtraining.airlines.domain;
 
-import org.springframework.lang.Nullable;
-
 import javax.persistence.*;
-import javax.validation.constraints.Min;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Flights {
@@ -12,25 +11,31 @@ public class Flights {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "departureAirportId")
     private Airport departureAirport;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "destAirportId")
     private Airport destAirport;
 
-    @Min(0)
-    @Nullable
-    private short distance;
+    @ManyToOne()
+    @JoinColumn(name = "crewTypeId")
+    private CrewTypes crewType;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "flightsPersonnel_id")
-    FlightsPersonnel flightsPersonnel;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "rlFlightsPersonnel",
+            joinColumns = @JoinColumn(name = "personnelId"),
+            inverseJoinColumns = @JoinColumn(name = "flightId")
+    )
+    private List<Personnel> flightPersonnel = new ArrayList();
 
     private Date departureTime;
 
     private Date destTime;
+
+    @Column(name = "s_distance", nullable = true)
+    private Short distance;
 
     public String getFlightShortName() {
         return String.format("%s - %s", departureAirport.getShortName(), destAirport.getShortName());
@@ -44,9 +49,6 @@ public class Flights {
 
     }
 
-    public Flights(RegularFlightTemplate template) {
-
-    }
 
     public void setDepartureAirport(Airport departureAirport) {
         this.departureAirport = departureAirport;
@@ -82,5 +84,21 @@ public class Flights {
 
     public Date getDestTime() {
         return destTime;
+    }
+
+    public CrewTypes getCrewType() {
+        return crewType;
+    }
+
+    public void setCrewType(CrewTypes crewType) {
+        this.crewType = crewType;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

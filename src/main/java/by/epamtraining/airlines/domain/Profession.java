@@ -29,6 +29,9 @@ public class Profession {
     @OneToMany(mappedBy = "profession", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Personnel> personnelList;
 
+    @ManyToMany(mappedBy = "professions", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<CrewTypes> crewTypes;
+
     public String getName() {
         return name;
     }

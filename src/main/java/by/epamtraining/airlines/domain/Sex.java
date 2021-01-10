@@ -3,7 +3,7 @@ package by.epamtraining.airlines.domain;
 public enum Sex {
     FEMALE("Female"), MALE("Male");
 
-   
+
 
     private final String name;
 

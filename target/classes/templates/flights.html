@@ -3,34 +3,210 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <th:block th:insert="fragments/head.html :: js"/>
+    <th:block th:insert="fragments/navbar.html" ::navbar/>
     <link th:href="@{/styles/footerfix.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-
 <body>
-<th:block th:insert="fragments/navbar.html" ::navbar/>
-<div class="container">
-   flights page
+
+
+<div style="margin:24px">
+    <form th:action="${'/flights/edit/'+{pageno}+'/?sortfield='+{sortfield}+'&sortasc='+{sortasc}}"
+          th:method="get">
+        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus">Add new</span></button>
+    </form>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th style="width: 16.66%" scope="col">
+                <div th:if="${sortfield=='departureAirport.shortName'}" th:remove="tag">
+                    <div th:if="${sortasc==true}" th:remove="tag">
+                        <a th:href="@{/flights/{page}/ (page=1 ,sortfield=departureAirport.shortName,sortasc=false)}"
+                           title="Sort">
+                            Departure
+                            <span class="dropup">
+                            <span class="caret">
+                            </span>
+	                        </span>
+                        </a>
+                    </div>
+                    <div th:if="${sortasc!=true}" th:remove="tag">
+                        <a th:href="@{/flights/{page}/ (page=1 ,sortfield=departureAirport.shortName,sortasc=true)}"
+                           title="Sort">
+                            Departure
+                            <span class="caret">
+	                        </span>
+                        </a>
+                    </div>
+                </div>
+                <div th:unless="${sortfield=='departureAirport.shortName'}" th:remove="tag">
+                    <a th:href="@{/flights/{page}/ (page=1 ,sortfield=departureAirport.shortName,sortasc=true)}"
+                       title="Sort">
+                        Departure
+                    </a>
+                </div>
+            </th>
+            <th style="width: 16.66%" scope="col">
+                <div th:if="${sortfield=='destAirport.shortName'}" th:remove="tag">
+                    <div th:if="${sortasc==true}" th:remove="tag">
+                        <a th:href="@{/flights/{page}/ (page=1 ,sortfield=destAirport.shortName,sortasc=false)}"
+                           title="Sort">
+                            Destination
+                            <span class="dropup">
+                            <span class="caret">
+                            </span>
+	                        </span>
+                        </a>
+                    </div>
+                    <div th:if="${sortasc!=true}" th:remove="tag">
+                        <a th:href="@{/flights/{page}/ (page=1 ,sortfield=destAirport.shortName,sortasc=true)}"
+                           title="Sort">
+                            Destination
+                            <span class="caret">
+	                        </span>
+                        </a>
+                    </div>
+                </div>
+                <div th:unless="${sortfield=='destAirport.shortName'}" th:remove="tag">
+                    <a th:href="@{/flights/{page}/ (page=1 ,sortfield=destAirport.shortName,sortasc=true)}"
+                       title="Sort">
+                        Destination
+                    </a>
+                </div>
+            </th>
+            <th style="width: 27%" scope="col">
+                <div th:if="${sortfield=='departureAirport.fullName'}" th:remove="tag">
+                    <div th:if="${sortasc==true}" th:remove="tag">
+                        <a th:href="@{/flights/{page}/ (page=1 ,sortfield=departureAirport.fullName,sortasc=false)}"
+                           title="Sort">
+                            Full Name
+                            <span class="dropup">
+                            <span class="caret">
+                            </span>
+	                        </span>
+                        </a>
+                    </div>
+                    <div th:if="${sortasc!=true}" th:remove="tag">
+                        <a th:href="@{/flights/{page}/ (page=1 ,sortfield=departureAirport.fullName,sortasc=true)}"
+                           title="Sort">
+                            Full Name
+                            <span class="caret">
+	                        </span>
+                        </a>
+                    </div>
+                </div>
+                <div th:unless="${sortfield=='departureAirport.fullName'}" th:remove="tag">
+                    <a th:href="@{/flights/{page}/ (page=1 ,sortfield=departureAirport.fullName,sortasc=true)}"
+                       title="Sort">
+                        Full Name
+                    </a>
+                </div>
+            </th>
+            <th style="width: 16.66%" scope="col">
+                <div th:if="${sortfield=='departureTime'}" th:remove="tag">
+                    <div th:if="${sortasc==true}" th:remove="tag">
+                        <a th:href="@{/flights/{page}/ (page=1 ,sortfield=departureTime,sortasc=false)}"
+                           title="Sort">
+                            Departure time
+                            <span class="dropup">
+                            <span class="caret">
+                            </span>
+	                        </span>
+                        </a>
+                    </div>
+                    <div th:if="${sortasc!=true}" th:remove="tag">
+                        <a th:href="@{/flights/{page}/ (page=1 ,sortfield=departureTime,sortasc=true)}"
+                           title="Sort">
+                            Departure time
+                            <span class="caret">
+	                        </span>
+                        </a>
+                    </div>
+                </div>
+                <div th:unless="${sortfield=='departureTime'}" th:remove="tag">
+                    <a th:href="@{/flights/{page}/ (page=1 ,sortfield=departureTime,sortasc=true)}"
+                       title="Sort">
+                        Departure time
+                    </a>
+                </div>
+            </th>
+            <th style="width: 16.66%" scope="col">
+                <div th:if="${sortfield=='destTime'}" th:remove="tag">
+                    <div th:if="${sortasc==true}" th:remove="tag">
+                        <a th:href="@{/flights/{page}/ (page=1 ,sortfield=destTime,sortasc=false)}"
+                           title="Sort">
+                            Destination time
+                            <span class="dropup">
+                            <span class="caret">
+                            </span>
+	                        </span>
+                        </a>
+                    </div>
+                    <div th:if="${sortasc!=true}" th:remove="tag">
+                        <a th:href="@{/flights/{page}/ (page=1 ,sortfield=destTime,sortasc=true)}"
+                           title="Sort">
+                            Destination time
+                            <span class="caret">
+	                        </span>
+                        </a>
+                    </div>
+                </div>
+                <div th:unless="${sortfield=='destTime'}" th:remove="tag">
+                    <a th:href="@{/flights/{page}/ (page=1 ,sortfield=destTime,sortasc=true)}"
+                       title="Sort">
+                        Destination time
+                    </a>
+                </div>
+            </th>
+            <th style="width: 16.66%" scope="col">
+                Crew type
+            </th>
+            <th style="width: 2%"></th>
+            <th style="width: 2%"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="flight : ${flights}">
+            <td th:text="${flight.departureAirport.shortName}"/>
+            <td th:text="${flight.destAirport.shortName}"/>
+            <td th:text="${flight.getFlightFullName()}"/>
+            <td th:text="${flight.departureTime}"/>
+            <td th:text="${flight.destTime}"/>
+            <td th:text="${flight.crewType.name}"/>
+            <td>
+                <form th:action="${'/flights/edit/'+{pageno}+'/'+{flight.id}+'/?sortfield='+{sortfield}+'&sortasc='+{sortasc}}"
+                      th:method="get">
+                    <button type="submit" data-toggle="modal"
+                            data-target="#edit" data-uid="1"
+                            class="update btn btn-warning btn-sm"
+                    ><span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                </form>
+            </td>
+            <td>
+                <form action="#"
+                      th:action="${'/flights/delete/'+{pageno}+'/'+{flight.id}+'/?sortfield='+{sortfield}+'&sortasc='+{sortasc}}"
+                      th:method="post">
+                    <button type="submit" data-toggle="modal" data-target="#delete" data-uid="1"
+                            class="delete btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
-<footer th:insert="fragments/footer.html :: footer"></footer>
 
-<table class="table">
-    <thead class="thead-dark">
-    <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Shortname</th>
-        <th scope="col">Fullname</th>
-        <th scope="col">Lat</th>
-        <th scope="col">Lon</th>
-    </tr>
-    </thead>
+<footer>
 
-    <tr th:each="airport : ${airports}">
-        <td th:text="${airport.id}"/>
-        <td th:text="${airport.shortName}"/>
-        <td th:text="${airport.fullName}"/>
-        <td th:text="${airport.lat}"/>
-        <td th:text="${airport.lon}"/>
-    </tr>
-</table>
+    <div th:with="pathpart=flights" th:remove="tag">
+        <th:block th:insert="fragments/pagenavigationfooter.html" ::footer/>
+    </div>
+
+    <br>
+    <th:block th:insert="fragments/footer.html" ::footer/>
+</footer>
 </body>
 </html>

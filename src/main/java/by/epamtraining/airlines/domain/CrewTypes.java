@@ -20,6 +20,9 @@ public class CrewTypes {
     )
     private List<Profession> professions = new ArrayList();
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "crewType")
+    private List<Flights> flights;
+
     public int getId() {
         return id;
     }

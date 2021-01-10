@@ -31,7 +31,7 @@ public class AirportController {
         }
         Page<Airport> airportPage = airportService.getAirports(n, RECORDS_PER_PAGE, sortfield, orderAsc);
         int totalPageqty = airportPage.getTotalPages();
-        if (n > totalPageqty) {
+        if ((n > totalPageqty) && (totalPageqty > 0)) {
             n = totalPageqty;
             airportPage = airportService.getAirports(n, RECORDS_PER_PAGE, sortfield, orderAsc);
         }
