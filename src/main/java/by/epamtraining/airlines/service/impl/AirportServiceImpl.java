@@ -22,11 +22,7 @@ public class AirportServiceImpl implements AirportService {
 
     @Override
     public List<Airport> getAirports() {
-        List<Airport> airports = new ArrayList<>();
-        airportRepository.findAll(Sort.by("fullname")).forEach(item -> {
-            airports.add(item);
-        });
-        return airports;
+        return airportRepository.findAll(Sort.by("fullname"));
     }
 
     @Override
@@ -45,7 +41,6 @@ public class AirportServiceImpl implements AirportService {
     public Optional<Airport> getById(int id) {
         return airportRepository.findById(id);
     }
-
 
     @Override
     public long getAirportsCount() {

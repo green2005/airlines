@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <th:block th:insert="fragments/head.html :: js"/>
+    <th:block th:insert="fragments/navbar.html" ::navbar/>
+    <link th:href="@{/styles/footerfix.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+
+<div style="margin:24px">
+    <form th:action="${'/personnel/edit/'+{pageno}+'/?sortfield='+{sortfield}+'&sortasc='+{sortasc}}"
+          th:method="get">
+        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus">Add new</span></button>
+    </form>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th style="width: 16.66%" scope="col">
+                <div th:if="${sortfield=='firstName'}" th:remove="tag">
+                    <div th:if="${sortasc==true}" th:remove="tag">
+                        <a th:href="@{/personnel/{page}/ (page=1 ,sortfield=firstName,sortasc=false)}" title="Sort">
+                            FirstName
+                            <span class="dropup">
+                            <span class="caret">
+                            </span>
+	                        </span>
+                        </a>
+                    </div>
+                    <div th:if="${sortasc!=true}" th:remove="tag">
+                        <a th:href="@{/personnel/{page}/ (page=1 ,sortfield=firstName,sortasc=true)}" title="Sort">
+                            FirstName
+                            <span class="caret">
+	                        </span>
+                        </a>
+                    </div>
+                </div>
+                <div th:unless="${sortfield=='firstName'}" th:remove="tag">
+                    <a th:href="@{/personnel/{page}/ (page=1 ,sortfield=firstName,sortasc=true)}" title="Sort">
+                        FirstName
+                    </a>
+                </div>
+            </th>
+            <th style="width: 16.66%" scope="col">
+                <div th:if="${sortfield=='lastName'}" th:remove="tag">
+                    <div th:if="${sortasc==true}" th:remove="tag">
+                        <a th:href="@{/personnel/{page}/ (page=1 ,sortfield=lastName,sortasc=false)}" title="Sort">
+                            LastName
+                            <span class="dropup">
+                            <span class="caret">
+                            </span>
+	                        </span>
+                        </a>
+                    </div>
+                    <div th:if="${sortasc!=true}" th:remove="tag">
+                        <a th:href="@{/personnel/{page}/ (page=1 ,sortfield=lastName,sortasc=true)}" title="Sort">
+                            LastName
+                            <span class="caret">
+	                        </span>
+                        </a>
+                    </div>
+                </div>
+                <div th:unless="${sortfield=='lastName'}" th:remove="tag">
+                    <a th:href="@{/personnel/{page}/ (page=1 ,sortfield=lastName,sortasc=true)}" title="Sort">
+                        LastName
+                    </a>
+                </div>
+            </th>
+            <th style="width: 16.66%" scope="col">
+                <div th:if="${sortfield=='profession.name'}" th:remove="tag">
+                    <div th:if="${sortasc==true}" th:remove="tag">
+                        <a th:href="@{/personnel/{page}/ (page=1 ,sortfield=profession.name,sortasc=false)}"
+                           title="Sort">
+                            Profession
+                            <span class="dropup">
+                            <span class="caret">
+                            </span>
+	                        </span>
+                        </a>
+                    </div>
+                    <div th:if="${sortasc!=true}" th:remove="tag">
+                        <a th:href="@{/personnel/{page}/ (page=1 ,sortfield=profession.name,sortasc=true)}"
+                           title="Sort">
+                            Profession
+                            <span class="caret">
+	                        </span>
+                        </a>
+                    </div>
+                </div>
+                <div th:unless="${sortfield=='profession.name'}" th:remove="tag">
+                    <a th:href="@{/personnel/{page}/ (page=1 ,sortfield=profession.name,sortasc=true)}" title="Sort">
+                        Profession
+                    </a>
+                </div>
+            </th>
+            <th style="width: 16.66%" scope="col">
+                <div th:if="${sortfield=='birthDate'}" th:remove="tag">
+                    <div th:if="${sortasc==true}" th:remove="tag">
+                        <a th:href="@{/personnel/{page}/ (page=1 ,sortfield=birthDate,sortasc=false)}" title="Sort">
+                            BirthDate
+                            <span class="dropup">
+                            <span class="caret">
+                            </span>
+	                        </span>
+                        </a>
+                    </div>
+                    <div th:if="${sortasc!=true}" th:remove="tag">
+                        <a th:href="@{/personnel/{page}/ (page=1 ,sortfield=birthDate,sortasc=true)}" title="Sort">
+                            BirthDate
+                            <span class="caret">
+	                        </span>
+                        </a>
+                    </div>
+                </div>
+                <div th:unless="${sortfield=='birthDate'}" th:remove="tag">
+                    <a th:href="@{/personnel/{page}/ (page=1 ,sortfield=birthDate,sortasc=true)}" title="Sort">
+                        BirthDate
+                    </a>
+                </div>
+            </th>
+            <th style="width: 16%">
+                Gender
+            </th>
+            <th style="width: 2%"></th>
+            <th style="width: 2%"></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="person : ${personnel}">
+            <td th:text="${person.firstName}"/>
+            <td th:text="${person.lastName}"/>
+            <td th:text="${person.profession.name+' '+person.profession.rank}"/>
+
+            <div th:if="${person.birthDate!=null}" th:remove="tag">
+                <!--<td th:text="${person.birthDate}"></td> -->
+                <td th:text="${#dates.format(person.birthDate, 'yyyy-MM-dd')}"></td>
+
+                <!--<td th:text="${#dates.format(person.birthDate, 'dd-MM-yyyy')}"></td> -->
+            </div>
+            <div th:unless="${person.birthDate!=null}" th:remove="tag">
+                <td></td>
+            </div>
+            <td th:text="${person.gender}"/>
+            <td>
+                <form th:action="${'/personnel/edit/'+{pageno}+'/'+{person.id}+'/?sortfield='+{sortfield}+'&sortasc='+{sortasc}}"
+                      th:method="get">
+                    <button type="submit" data-toggle="modal"
+                            data-target="#edit" data-uid="1"
+                            class="update btn btn-warning btn-sm"
+                    ><span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                </form>
+            </td>
+            <td>
+                <form action="#"
+                      th:action="${'/personnel/delete/'+{pageno}+'/'+{person.id}+'/?sortfield='+{sortfield}+'&sortasc='+{sortasc}}"
+                      th:method="post">
+                    <button type="submit" data-toggle="modal" data-target="#delete" data-uid="1"
+                            class="delete btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<footer>
+
+    <div th:with="pathpart=personnel" th:remove="tag">
+        <th:block th:insert="fragments/pagenavigationfooter.html" ::footer/>
+    </div>
+
+    <br>
+    <th:block th:insert="fragments/footer.html" ::footer/>
+</footer>
+</body>
+</html>

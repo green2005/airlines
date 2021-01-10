@@ -12,12 +12,12 @@ public class Airport {
     private int id;
 
 
-    @Size(min = 2, max = 20, message = "Incorrect airport shortName")
+    @Size(min = 2, max = 20)
     @Column(unique = true)
     private String shortName;
 
     @Column(unique = true)
-    @Size(min = 2, max = 255, message = "Incorrect airport name")
+    @Size(min = 2, max = 255)
     private String fullName;
 
     private String country;

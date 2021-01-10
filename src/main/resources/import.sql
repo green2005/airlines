@@ -1,3 +1,4 @@
+
 delete from airport;
 
 insert into airport(short_name, full_name, country, city, slat, slon)values('TIA','Tirana International Airport', 'Albania', 'Tirana','41.4147', '19.7206');
@@ -17,3 +18,35 @@ insert into airport(short_name, full_name, country, city, slat, slon)values('BER
 insert into airport(short_name, full_name, country, city, slat, slon)values('AXD','Alexandroupolis International Airport', 'Greece', 'Alexandroupolis','40.8558', '25.95626');
 insert into airport(short_name, full_name, country, city, slat, slon)values('KIT','Kithira Island National Airport', 'Greece','Kithira' ,'36.2742', '23.016976');
 insert into airport(short_name, full_name, country, city, slat, slon)values('KEF','Keflavík International Airport', 'Iceland', 'Keflavík','63.9786', '22.6350');
+
+
+delete from profession;
+insert into profession(name, rank, hour_rate ) values('dispatcher', 'middle' , 40.0)
+insert into profession(name, rank, hour_rate ) values('air hostess', 'middle' , 15.0)
+insert into profession(name, rank, hour_rate ) values('air hostess', 'senior' , 20.0)
+insert into profession(name, rank, hour_rate ) values('pilot', 'senior' , 40.0)
+insert into profession(name, rank, hour_rate ) values('pilot', 'middle' , 30.0)
+
+delete from personnel;
+
+insert into personnel(first_name, last_name, profession_id, birth_date, gender)  select 'Mike','Vazovsky', prof.id , '20.12.1985', 1 from profession prof where prof.name='dispatcher' and prof.rank='middle';
+
+
+insert into personnel(first_name, last_name, profession_id, birth_date, gender)  select 'Nick','Vazovsky', prof.id , '10.02.1980', 1 from profession prof where prof.name='dispatcher' and prof.rank='middle';
+
+insert into personnel(first_name, last_name, profession_id, birth_date, gender)  select 'Petr','Johnson', prof.id , '01.01.1979', 1 from profession prof where prof.name='pilot' and prof.rank='senior';
+
+
+insert into personnel(first_name, last_name, profession_id, birth_date, gender)  select 'Keyth','Klinton', prof.id , '09.04.1979', 0 from profession prof where prof.name='pilot' and prof.rank='middle';
+
+insert into personnel(first_name, last_name, profession_id, birth_date, gender)  select 'Alex','Jezoff', prof.id , '02.04.1995', 1 from profession prof where prof.name='pilot' and prof.rank='middle';
+
+insert into personnel(first_name, last_name, profession_id, birth_date, gender)  select 'John','Smith', prof.id , '09.04.1993', 1 from profession prof where prof.name='pilot' and prof.rank='middle';
+
+insert into personnel(first_name, last_name, profession_id, birth_date, gender)  select 'Jess','Boyden', prof.id , '22.09.1989', 0 from profession prof where prof.name='air hostess' and prof.rank='middle';
+
+insert into personnel(first_name, last_name, profession_id, birth_date, gender)  select 'Emily','Spark', prof.id , '20.10.1994', 0 from profession prof where prof.name='air hostess' and prof.rank='senior';
+
+insert into personnel(first_name, last_name, profession_id, birth_date, gender)  select 'Sandra','Nasik', prof.id , '22.09.1992', 0 from profession prof where prof.name='air hostess' and prof.rank='middle';
+
+

@@ -3,34 +3,74 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <th:block th:insert="fragments/head.html :: js"/>
+    <th:block th:insert="fragments/navbar.html" ::navbar/>
     <link th:href="@{/styles/footerfix.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-
 <body>
-<th:block th:insert="fragments/navbar.html" ::navbar/>
-<div class="container">
-    professions page
+
+
+<div style="margin:24px">
+    <form th:action="${'/professions/edit/'}"
+          th:method="get">
+        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus">Add new</span></button>
+    </form>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th style="width: 16.66%" scope="col">
+                Profession
+            </th>
+            <th style="width: 16.66%" scope="col">
+                Rank
+            </th>
+            <th style="width: 16.66%" scope="col">
+                HourRate
+            </th>
+            <th style="width: 2%"></th>
+            <th style="width: 2%"></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="profession : ${professions}">
+            <td th:text="${profession.name}"/>
+            <td th:text="${profession.rank}"/>
+            <td th:text="${profession.hourRate}"/>
+            <td>
+                <form th:action="${'/professions/edit/'+{profession.id}}"
+                      th:method="get">
+                    <button type="submit" data-toggle="modal"
+                            data-target="#edit" data-uid="1"
+                            class="update btn btn-warning btn-sm"
+                    ><span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                </form>
+            </td>
+            <td>
+                <form action="#"
+                      th:action="${'/professions/delete/'+{profession.id}}"
+                      th:method="post">
+                    <button type="submit" data-toggle="modal" data-target="#delete" data-uid="1"
+                            class="delete btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
-<footer th:insert="fragments/footer.html :: footer"></footer>
 
-<table class="table">
-    <thead class="thead-dark">
-    <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Shortname</th>
-        <th scope="col">Fullname</th>
-        <th scope="col">Lat</th>
-        <th scope="col">Lon</th>
-    </tr>
-    </thead>
+<footer>
 
-    <tr th:each="airport : ${airports}">
-        <td th:text="${airport.id}"/>
-        <td th:text="${airport.shortName}"/>
-        <td th:text="${airport.fullName}"/>
-        <td th:text="${airport.lat}"/>
-        <td th:text="${airport.lon}"/>
-    </tr>
-</table>
+    <div th:with="pathpart=airports" th:remove="tag">
+        <th:block th:insert="fragments/pagenavigationfooter.html" ::footer/>
+    </div>
+
+    <br>
+    <th:block th:insert="fragments/footer.html" ::footer/>
+</footer>
 </body>
 </html>

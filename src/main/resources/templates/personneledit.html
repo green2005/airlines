@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <th:block th:insert="fragments/head.html :: js"/>
+    <th:block th:insert="fragments/navbar.html" ::navbar/>
+    <link th:href="@{/styles/footerfix.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div th:if="${exception!=null}" th:remove="tag">
+    <div class="alert alert-warning" role="alert">
+        error:
+        <p th:text="${exception}"></p>
+    </div>
+</div>
+
+<div class="container">
+    <form th:action="${'/personnel/edit/'+{pageno}+'/?sortfield='+{sortfield}+'&sortasc='+{sortasc}}"
+          method="post">
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="firstName">FirstName:</label>
+                    <input type="text" class="form-control" id="firstName" th:field="*{personnel.firstName}"
+                           minlength=3 maxlength=55 required
+                    >
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="lastName">LastName:</label>
+                    <input type="text" class="form-control" id="lastName" th:field="*{personnel.lastName}"
+                           minlength=3 maxlength=55 required
+                    >
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="birthDate">BirthDate:</label>
+                    <!--${#dates.format(person.birthDate, 'dd-MM-yyyy')}-->
+                    <input class="form-control" type="date" id="birthDate" th:field="*{personnel.birthDate}">
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="gender">Gender:</label>
+                    <select class="form-control" id="gender" th:field="*{personnel.gender}">
+                        <option th:selected="${personnel.gender==T(by.epamtraining.airlines.domain.Sex).MALE}"
+                                th:value="MALE">Male</option>
+                        <option th:selected="${personnel.gender==T(by.epamtraining.airlines.domain.Sex).FEMALE}"
+                                th:value="FEMALE">Female</option>
+                    </select>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-1"></div>
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="profession">Profession:</label>
+                    <select class="form-control" th:field="${personnel.profession.id}" id="profession">
+                        <option th:each="profession : ${professions}" th:value="${profession.id}"
+                                th:text="${profession.name+' '+profession.rank}"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class=" row">
+            <div class="col-sm-1"></div>
+            <input type="hidden" class="form-control" id="id" th:field="*{personnel.id}">
+        </div>
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-save">Save changes</i></button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<footer>
+    <th:block th:insert="fragments/footer.html" ::footer/>
+
+</footer>
+</body>
+</html>

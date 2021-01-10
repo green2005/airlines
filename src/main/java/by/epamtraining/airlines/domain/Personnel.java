@@ -2,10 +2,12 @@ package by.epamtraining.airlines.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"lastName", "firstName", "birthDate"})
+})
 public class Personnel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,13 +19,21 @@ public class Personnel {
     @Size(max = 255)
     private String lastName;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "profession_id")
     Profession profession;
 
     private Date birthDate;
 
-    private Sex sex;
+    private Sex gender;
+
+    public Profession getProfession() {
+        return profession;
+    }
+
+    public void setProfession(Profession profession) {
+        this.profession = profession;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -49,11 +59,19 @@ public class Personnel {
         this.birthDate = birthDate;
     }
 
-    public Sex getSex() {
-        return sex;
+    public Sex getGender() {
+        return gender;
     }
 
-    public void setSex(Sex sex) {
-        this.sex = sex;
+    public void setGender(Sex gender) {
+        this.gender = gender;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

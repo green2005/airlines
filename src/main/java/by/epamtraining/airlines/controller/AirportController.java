@@ -1,34 +1,22 @@
 package by.epamtraining.airlines.controller;
 
-import by.epamtraining.airlines.NavPageLink;
 import by.epamtraining.airlines.domain.Airport;
 import by.epamtraining.airlines.exceptions.DomainNotFoundException;
 import by.epamtraining.airlines.service.AirportService;
-import org.attoparser.util.TextUtil;
-import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.FlashMap;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.support.RequestContextUtils;
-import org.springframework.web.servlet.view.RedirectView;
-import org.thymeleaf.util.TextUtils;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.IOException;
-import java.util.List;
+
+import static by.epamtraining.airlines.AppStarter.RECORDS_PER_PAGE;
 
 @Controller
 public class AirportController {
-    private static final int RECORDS_PER_PAGE = 5;
-
 
     @Autowired
     private AirportService airportService;
@@ -109,7 +97,9 @@ public class AirportController {
 
     @ExceptionHandler(org.springframework.dao.DataIntegrityViolationException.class)
     public ModelAndView errorHandler(HttpServletRequest request, org.springframework.dao.DataIntegrityViolationException e
-    ) {
+    ) {/*
+        process duplicates, some fields should be unique
+       */
         ModelAndView model = new ModelAndView("airportedit");
         Airport airport = new Airport();
         model.addObject("sortfield", request.getParameter("sortfield"));

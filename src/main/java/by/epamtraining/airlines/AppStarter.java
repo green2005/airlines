@@ -9,6 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class AppStarter {
+    public static final int RECORDS_PER_PAGE = 5;
+
     public static void main(String[] args) {
         SpringApplication.run(AppStarter.class, args);
     }
