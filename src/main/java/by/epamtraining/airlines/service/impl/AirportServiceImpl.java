@@ -22,7 +22,7 @@ public class AirportServiceImpl implements AirportService {
 
     @Override
     public List<Airport> getAirports() {
-        return airportRepository.findAll(Sort.by("fullname"));
+        return airportRepository.findAll(Sort.by("shortName"));
     }
 
     @Override

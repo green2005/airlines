@@ -124,7 +124,7 @@ public class PersonnelController {
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-        CustomDateEditor editor = new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true);
+        CustomDateEditor editor = new CustomDateEditor(new SimpleDateFormat("dd.MM.yyyy HH:mm"), true);
         binder.registerCustomEditor(Date.class, editor);
     }
 

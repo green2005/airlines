@@ -55,8 +55,8 @@ insert into personnel(first_name, last_name, profession_id, birth_date, gender) 
 insert into personnel(first_name, last_name, profession_id, birth_date, gender)  select 'John','Malkovich', prof.id , '14.04.1985', 1 from profession prof where prof.name='radioman' and prof.rank='middle';
 
 delete from crew_types;
-insert into crew_types(name)values('full');
-insert into crew_types(name)values('clipped');
+insert into crew_types(name, description)values('full', 'full crew for flight');
+insert into crew_types(name, description)values('clipped', 'clipped crew');
 delete from rl_crew_professions;
 
 insert into rl_crew_professions(crew_id, profession_id) select  crew.id, prof.id from profession prof, crew_types crew where prof.name='pilot' and prof.rank='middle' and crew.name='full'

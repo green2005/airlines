@@ -1,17 +1,27 @@
 package by.epamtraining.airlines.controller;
 
 import by.epamtraining.airlines.domain.Airport;
+import by.epamtraining.airlines.domain.CrewTypes;
 import by.epamtraining.airlines.domain.Flights;
 import by.epamtraining.airlines.exceptions.DomainNotFoundException;
+import by.epamtraining.airlines.service.AirportService;
+import by.epamtraining.airlines.service.CrewTypesService;
 import by.epamtraining.airlines.service.FlightsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 import static by.epamtraining.airlines.AppStarter.RECORDS_PER_PAGE;
 
@@ -20,6 +30,12 @@ public class FlightsController {
 
     @Autowired
     FlightsService flightsService;
+
+    @Autowired
+    AirportService airportService;
+
+    @Autowired
+    CrewTypesService crewTypesService;
 
     @GetMapping(value = {"/flights", "/flights/{n}"})
     public String getFlights(@PathVariable(required = false, name = "n") Integer n,
@@ -62,24 +78,43 @@ public class FlightsController {
     @GetMapping(value = {"/flights/edit/{pageno}/{id}", "/flights/edit", "/flights/edit/{pageno}"})
     public String getFlightsEdit(@PathVariable(required = false) Integer pageno,
                                  @PathVariable(required = false) Integer id,
-                                 @RequestParam(required = false, name = "sortfield", defaultValue = "shortName") String sortfield,
+                                 @RequestParam(required = false, name = "sortfield", defaultValue = "departureTime") String sortfield,
                                  @RequestParam(required = false, name = "sortasc", defaultValue = "true") Boolean orderAsc,
                                  Model model) {
-        Flights flights;
+        Flights flight;
         if (pageno == null) {
             pageno = 1;
         }
         if (id == null) {
-            flights = new Flights();
+            flight = new Flights();
         } else {
-            flights = flightsService.getById(id).orElseThrow(DomainNotFoundException::new);
+            flight = flightsService.getById(id).orElseThrow(DomainNotFoundException::new);
         }
+        List<Airport> airportList = airportService.getAirports();
+        List<CrewTypes> crewTypesList = crewTypesService.getCrewTypes();
+        model.addAttribute("crewTypes", crewTypesList);
+        model.addAttribute("airports", airportList);
         model.addAttribute("pageno", pageno);
         model.addAttribute("sortfield", sortfield);
         model.addAttribute("sortasc", orderAsc);
-        model.addAttribute("flights", flights);
+        model.addAttribute("flight", flight);
         return "flightsedit";
     }
+
+    @PostMapping(value = {"/flights/edit/{pageno}", "/flights/edit"})
+    public String postAirportsEdit(@PathVariable(required = false) Integer pageno,
+                                   @RequestParam(required = false, name = "sortfield", defaultValue = "departureTime") String sortfield,
+                                   @RequestParam(required = false, name = "sortasc", defaultValue = "true") Boolean orderAsc,
+                                   @Valid Flights flights) {
+        if (pageno == null) {
+            pageno = 1;
+        }
+        flightsService.save(flights);
+        return "redirect:/flights/".
+                concat(Integer.toString(pageno)).
+                concat(String.format("/?sortfield=%s&sortasc=%b", sortfield, orderAsc));
+    }
+
 
     @ExceptionHandler(org.springframework.dao.DataIntegrityViolationException.class)
     public ModelAndView errorHandler(HttpServletRequest request, org.springframework.dao.DataIntegrityViolationException e

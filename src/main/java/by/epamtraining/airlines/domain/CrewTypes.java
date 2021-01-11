@@ -13,6 +13,8 @@ public class CrewTypes {
 
     private String name;
 
+    private String description;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "rlCrewProfessions",
             joinColumns = {@JoinColumn(name = "crew_id", nullable = false)},
@@ -41,5 +43,17 @@ public class CrewTypes {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

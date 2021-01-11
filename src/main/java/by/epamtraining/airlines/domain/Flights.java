@@ -1,5 +1,7 @@
 package by.epamtraining.airlines.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,8 +32,10 @@ public class Flights {
     )
     private List<Personnel> flightPersonnel = new ArrayList();
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date departureTime;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date destTime;
 
     @Column(name = "s_distance", nullable = true)
@@ -100,5 +104,9 @@ public class Flights {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setDestTime(Date destTime) {
+        this.destTime = destTime;
     }
 }
