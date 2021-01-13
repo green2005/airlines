@@ -8,19 +8,15 @@ import by.epamtraining.airlines.service.AirportService;
 import by.epamtraining.airlines.service.CrewTypesService;
 import by.epamtraining.airlines.service.FlightsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import static by.epamtraining.airlines.AppStarter.RECORDS_PER_PAGE;
@@ -46,6 +42,7 @@ public class FlightsController {
             n = 1;
         }
         Page<Flights> flightsPage = flightsService.getFlights(n, RECORDS_PER_PAGE, sortfield, orderAsc);
+       // List<FlightsDTO> fl = flightsService.getFlightsDTO();
         int totalPageqty = flightsPage.getTotalPages();
         if ((n > totalPageqty) && (totalPageqty > 0)) {
             n = totalPageqty;

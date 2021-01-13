@@ -27,8 +27,8 @@ public class Flights {
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "rlFlightsPersonnel",
-            joinColumns = @JoinColumn(name = "personnelId"),
-            inverseJoinColumns = @JoinColumn(name = "flightId")
+            joinColumns = @JoinColumn(name = "flightId"),
+            inverseJoinColumns = @JoinColumn(name = "personnelId")
     )
     private List<Personnel> flightPersonnel = new ArrayList();
 
@@ -40,6 +40,8 @@ public class Flights {
 
     @Column(name = "s_distance", nullable = true)
     private Short distance;
+
+
 
     public String getFlightShortName() {
         return String.format("%s - %s", departureAirport.getShortName(), destAirport.getShortName());

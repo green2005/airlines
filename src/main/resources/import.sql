@@ -72,7 +72,13 @@ insert into rl_crew_professions(crew_id, profession_id) select  crew.id, prof.id
 insert into rl_crew_professions(crew_id, profession_id) select  crew.id, prof.id from profession prof, crew_types crew where prof.name='air hostess' and prof.rank='middle' and crew.name='clipped'
 
 delete from flights;
-insert into flights(departure_time, dest_time, crew_type_id, departure_airport_id, dest_airport_id) select '2021-02-10 10:30:00', '2021-02-10 15:22:00', ct.id, dep.id, dest.id from crew_types ct, airport dest, airport dep  where ct.name='full' and dep.short_name='MSQ' and dest.short_name = 'VAR'
-insert into flights(departure_time, dest_time, crew_type_id, departure_airport_id, dest_airport_id) select '2021-02-10 18:30:00', '2021-02-10 23:42:00', ct.id, dep.id, dest.id from crew_types ct, airport dest, airport dep  where ct.name='full' and dep.short_name='VAR' and dest.short_name = 'MSQ'
+insert into flights(departure_time, dest_time, crew_type_id, departure_airport_id, dest_airport_id) select '2021-02-10 10:30:00', '2021-02-10 15:22:00', ct.id, dep.id, dest.id from crew_types ct, airport dest, airport dep  where ct.name='clipped' and dep.short_name='MSQ' and dest.short_name = 'VAR'
+insert into flights(departure_time, dest_time, crew_type_id, departure_airport_id, dest_airport_id) select '2021-02-10 18:30:00', '2021-02-10 23:42:00', ct.id, dep.id, dest.id from crew_types ct, airport dest, airport dep  where ct.name='clipped' and dep.short_name='VAR' and dest.short_name = 'MSQ'
 insert into flights(departure_time, dest_time, crew_type_id, departure_airport_id, dest_airport_id) select '2021-02-12 11:45:00', '2021-02-12 18:10:00', ct.id, dep.id, dest.id from crew_types ct, airport dest, airport dep  where ct.name='full' and dep.short_name='MSQ' and dest.short_name = 'KIT'
 insert into flights(departure_time, dest_time, crew_type_id, departure_airport_id, dest_airport_id) select '2021-02-12 22:45:00', '2021-02-13 02:12:00', ct.id, dep.id, dest.id from crew_types ct, airport dest, airport dep  where ct.name='full' and dep.short_name='KIT' and dest.short_name = 'MSQ'
+
+delete from rl_flights_personnel;
+
+insert into rl_flights_personnel(personnel_id, flight_id)select pilot1.id, fl.id from crew_types cr, personnel pilot1, flights fl, profession prof where cr.name='clipped' and pilot1.profession_id=prof.id and fl.crew_type_id = cr.id  and prof.name = 'pilot' and rank='middle' order by pilot1.first_name limit 1;
+insert into rl_flights_personnel(personnel_id, flight_id) select pilot1.id, fl.id from crew_types cr, personnel pilot1, flights fl, profession prof    where cr.name='clipped' and pilot1.profession_id=prof.id and fl.crew_type_id = cr.id  and prof.name = 'navigator' and rank='middle' order by pilot1.first_name limit 1;
+insert into rl_flights_personnel(personnel_id, flight_id) select pilot1.id, fl.id from crew_types cr, personnel pilot1, flights fl, profession prof    where cr.name='clipped' and pilot1.profession_id=prof.id and fl.crew_type_id = cr.id  and prof.name = 'air hostess' and rank='middle' order by pilot1.first_name limit 1;

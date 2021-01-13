@@ -3,34 +3,85 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <th:block th:insert="fragments/head.html :: js"/>
+    <th:block th:insert="fragments/navbar.html" ::navbar/>
     <link th:href="@{/styles/footerfix.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-
 <body>
-<th:block th:insert="fragments/navbar.html" ::navbar/>
-<div class="container">
-    flightspersonnel page
+
+<div style="margin:24px">
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th style="width: 16.66%" scope="col">
+                DepartureAirport
+            </th>
+            <th style="width: 16.66%" scope="col">
+                DestAirport
+            </th>
+            <th style="width: 16.66%" scope="col">
+                DepartureDate
+            </th>
+            <th style="width: 16.66%" scope="col">
+                DestDate
+            </th>
+            <th style="width: 9.8%" scope="col">
+                Status
+            </th>
+            <th style="width: 9.8%" scope="col">
+                Persons in crew
+            </th>
+            <th style="width: 9.8%" scope="col">
+                Persons appointed
+            </th>
+            <th style="width: 2%"></th>
+            <th style="width: 2%"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="flight : ${flightspersonnel}">
+            <td th:text="${flight.getDepartureAirportShortName()}"/>
+            <td th:text="${flight.getDestAirportShortName()}"/>
+            <td th:text="${flight.getDepartureDate()}"/>
+            <td th:text="${flight.getDestDate()}"/>
+            <td th:text="${flight.getStatus()}"/>
+            <td th:text="${flight.getProfessionCount()}"/>
+            <td th:text="${flight.getPersonsCount()}"/>
+            <td>
+                <form
+                        th:action="${'/flightspersonnel/edit/' + {flight.getId()}}"
+                        th:method="get">
+                    <button type="submit" data-toggle="modal"
+                            data-target="#edit" data-uid="1"
+                            class="update btn btn-warning btn-sm"
+                    ><span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                </form>
+            </td>
+            <td>
+                <form action="#"
+                      th:action="${'/flightspersonnel/delete/' + {flight.getId()}}"
+                      th:method="post">
+                    <button type="submit" data-toggle="modal" data-target="#delete" data-uid="1"
+                            class="delete btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
-<footer th:insert="fragments/footer.html :: footer"></footer>
 
-<table class="table">
-    <thead class="thead-dark">
-    <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Shortname</th>
-        <th scope="col">Fullname</th>
-        <th scope="col">Lat</th>
-        <th scope="col">Lon</th>
-    </tr>
-    </thead>
-
-    <tr th:each="airport : ${airports}">
-        <td th:text="${airport.id}"/>
-        <td th:text="${airport.shortName}"/>
-        <td th:text="${airport.fullName}"/>
-        <td th:text="${airport.lat}"/>
-        <td th:text="${airport.lon}"/>
-    </tr>
-</table>
+<footer>
+    <!--
+        <div th:with="pathpart=flights" th:remove="tag">
+            <th:block th:insert="fragments/pagenavigationfooter.html" ::footer/>
+        </div>
+    -->
+    <br>
+    <th:block th:insert="fragments/footer.html" ::footer/>
+</footer>
 </body>
 </html>

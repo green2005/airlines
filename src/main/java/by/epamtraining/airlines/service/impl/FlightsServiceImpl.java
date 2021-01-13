@@ -1,7 +1,8 @@
 package by.epamtraining.airlines.service.impl;
 
 import by.epamtraining.airlines.domain.Flights;
-import by.epamtraining.airlines.repository.FlighsRepository;
+import by.epamtraining.airlines.dto.FlightsPersonnelDTO;
+import by.epamtraining.airlines.repository.FlightsRepository;
 import by.epamtraining.airlines.service.FlightsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,7 +17,7 @@ import java.util.Optional;
 @Service
 public class FlightsServiceImpl implements FlightsService {
     @Autowired
-    FlighsRepository flighsRepository;
+    FlightsRepository flighsRepository;
 
     @Override
     public List<Flights> getFlights() {
