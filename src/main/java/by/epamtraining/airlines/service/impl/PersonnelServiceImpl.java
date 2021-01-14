@@ -25,6 +25,11 @@ public class PersonnelServiceImpl implements PersonnelService {
     }
 
     @Override
+    public List<Personnel> getByProfession(String professionName, String rank) {
+        return personnelRepository.getByProfession(professionName, rank);
+    }
+
+    @Override
     public Page<Personnel> getPersonnel(Integer pageN, Integer pageSize, String sortField, Boolean sortAsc) {
         Sort sort;
         if (sortAsc) {

@@ -9,6 +9,8 @@ import java.util.Optional;
 public interface PersonnelService {
     List<Personnel> getPersonnel();
 
+    List<Personnel> getByProfession(String professionName, String rank);
+
     Page<Personnel> getPersonnel(Integer pageN, Integer pageSize, String sortField, Boolean sortAsc);
 
     Optional<Personnel> getById(int id);

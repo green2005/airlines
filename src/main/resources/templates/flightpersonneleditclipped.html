@@ -24,19 +24,73 @@
             <div class="col-sm-1"></div>
             <div class="col-sm-4">
                 <div class="form-group">
-                    <label for="firstName">FirstName:</label>
-                    <input type="text" class="form-control" id="firstName"
-                           minlength=3 maxlength=55 required
-                    >
+                    <label for="departure">Departure:</label>
+                    <input type="text" class="form-control" id="departure"
+                           th:value="${flight.departureAirport.shortName}"
+                           readonly>
                 </div>
             </div>
 
             <div class="col-sm-4">
                 <div class="form-group">
-                    <label for="lastName">LastName:</label>
-                    <input type="text" class="form-control" id="lastName"
-                           minlength=3 maxlength=55 required
-                    >
+                    <label for="destination">Destination:</label>
+                    <input type="text" class="form-control" id="destination" th:value="${flight.destAirport.shortName}"
+                           readonly>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="departure time">Departure Time:</label>
+                    <input type="text" class="form-control" id="departure time" th:value="${flight.departureTime}"
+                           readonly>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="destination time">Destination Time:</label>
+                    <input type="text" class="form-control" id="destination time" th:value="${flight.destTime}"
+                           readonly>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="pilot">Pilot:</label>
+                    <select class="form-control" th:field="${pilot.id}" id="pilot" name="pilot">
+                        <option th:each="person : ${pilotlist}" th:value="${person.id}"
+                                th:text="${person.firstName+' '+person.lastName}"></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="navigator">Navigator:</label>
+                    <select class="form-control" th:field="*{navigator.id}" id="navigator" name="navigator">
+                        <option th:each="person : ${navigatorlist}" th:value="${person.id}"
+                                th:text="${person.firstName+' '+person.lastName}"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="airhostess">Air hostess:</label>
+                    <select class="form-control" th:field="*{airhostess.id}" id="airhostess" name="airhostess">
+                        <option th:each="person : ${airhostesslist}" th:value="${person.id}"
+                                th:text="${person.firstName+' '+person.lastName}"></option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -45,19 +99,11 @@
             <div class="col-sm-1"></div>
 
             <div class="col-sm-4">
-                <div class="form-group">
-                    <label for="profession">Profession:</label>
-                    <select class="form-control" th:field="${personnel.profession.id}" id="profession">
-                        <option th:each="profession : ${professions}" th:value="${profession.id}"
-                                th:text="${profession.name+' '+profession.rank}"></option>
-                    </select>
-                </div>
             </div>
         </div>
-
         <div class=" row">
             <div class="col-sm-1"></div>
-            <input type="hidden" class="form-control" id="id" th:field="*{flight.id}">
+            <input type="hidden" class="form-control" id="flightid" name="flightid" th:value="*{flight.id}">
         </div>
         <div class="row">
             <div class="col-sm-1"></div>

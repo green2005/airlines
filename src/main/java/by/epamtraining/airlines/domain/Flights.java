@@ -42,7 +42,6 @@ public class Flights {
     private Short distance;
 
 
-
     public String getFlightShortName() {
         return String.format("%s - %s", departureAirport.getShortName(), destAirport.getShortName());
     }
@@ -110,5 +109,14 @@ public class Flights {
 
     public void setDestTime(Date destTime) {
         this.destTime = destTime;
+    }
+
+    public List<Personnel> getFlightPersonnel() {
+        return flightPersonnel;
+    }
+
+    public void addFlightPersonnel(List<Personnel> personnelList) {
+        flightPersonnel.clear();
+        flightPersonnel.addAll(personnelList);
     }
 }

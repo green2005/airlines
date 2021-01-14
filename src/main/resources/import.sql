@@ -46,7 +46,7 @@ insert into personnel(first_name, last_name, profession_id, birth_date, gender) 
 
 insert into personnel(first_name, last_name, profession_id, birth_date, gender)  select 'Jess','Boyden', prof.id , '22.09.1989', 0 from profession prof where prof.name='air hostess' and prof.rank='middle';
 
-insert into personnel(first_name, last_name, profession_id, birth_date, gender)  select 'Emily','Spark', prof.id , '20.10.1994', 0 from profession prof where prof.name='air hostess' and prof.rank='senior';
+insert into personnel(first_name, last_name, profession_id, birth_date, gender)  select 'Emily','Spark', prof.id , '20.10.1994', 0 from profession prof where prof.name='air hostess' and prof.rank='middle';
 
 insert into personnel(first_name, last_name, profession_id, birth_date, gender)  select 'Sandra','Nasik', prof.id , '22.09.1992', 0 from profession prof where prof.name='air hostess' and prof.rank='middle';
 
