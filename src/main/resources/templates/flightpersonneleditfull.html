@@ -1,10 +1,136 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <th:block th:insert="fragments/head.html :: js"/>
+    <th:block th:insert="fragments/navbar.html" ::navbar/>
+    <link th:href="@{/styles/footerfix.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 
+<div th:if="${exception!=null}" th:remove="tag">
+    <div class="alert alert-warning" role="alert">
+        error:
+            <ul>
+                <li th:each="item : ${exception}" th:text="${item}"></li>
+            </ul>
+    </div>
+</div>
+
+<div class="container">
+    <form th:action="${'/flightspersonnel/edit/'}"
+          method="post">
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="departure">Departure:</label>
+                    <input type="text" class="form-control" id="departure"
+                           th:value="${flight.departureAirport.shortName}"
+                           readonly>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="destination">Destination:</label>
+                    <input type="text" class="form-control" id="destination" th:value="${flight.destAirport.shortName}"
+                           readonly>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="departure time">Departure Time:</label>
+                    <input type="text" class="form-control" id="departure time" th:value="${flight.departureTime}"
+                           readonly>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="destination time">Destination Time:</label>
+                    <input type="text" class="form-control" id="destination time" th:value="${flight.destTime}"
+                           readonly>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="pilot">Pilot1:</label>
+                    <select class="form-control" th:field="${pilot.id}" id="pilot" name="pilot">
+                        <option th:each="person : ${pilotlist}" th:value="${person.id}"
+                                th:text="${person.firstName+' '+person.lastName}"></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="pilot">Pilot2:</label>
+                    <select class="form-control" th:field="${pilot2.id}" id="pilot2" name="pilot2">
+                        <option th:each="person : ${pilotlist}" th:value="${person.id}"
+                                th:text="${person.firstName+' '+person.lastName}"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-1"></div>
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="navigator">Navigator:</label>
+                    <select class="form-control" th:field="*{navigator.id}" id="navigator" name="navigator">
+                        <option th:each="person : ${navigatorlist}" th:value="${person.id}"
+                                th:text="${person.firstName+' '+person.lastName}"></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="air hostess">Air hostess:</label>
+                    <select class="form-control" th:field="*{air hostess.id}" id="air hostess" name="air hostess">
+                        <option th:each="person : ${airhostesslist}" th:value="${person.id}"
+                                th:text="${person.firstName+' '+person.lastName}"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-1"></div>
+
+            <div class="col-sm-4">
+            </div>
+        </div>
+        <div class=" row">
+            <div class="col-sm-1"></div>
+            <input type="hidden" class="form-control" id="flightid" name="flightid" th:value="*{flight.id}">
+        </div>
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-save">Save changes</i></button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<footer>
+    <th:block th:insert="fragments/footer.html" ::footer/>
+
+</footer>
 </body>
 </html>

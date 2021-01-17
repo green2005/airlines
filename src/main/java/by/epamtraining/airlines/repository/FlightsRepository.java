@@ -1,12 +1,14 @@
 package by.epamtraining.airlines.repository;
 
 import by.epamtraining.airlines.domain.Flights;
+import by.epamtraining.airlines.domain.Personnel;
 import by.epamtraining.airlines.dto.FlightsPersonnelDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 public interface FlightsRepository extends JpaRepository<Flights, Integer> {
@@ -15,6 +17,7 @@ public interface FlightsRepository extends JpaRepository<Flights, Integer> {
     personnel assigned to the flight.
     if all personnel, that is needed, is assigned to the flight - it has status 'filled', else - 'not ready'
  */
+
     @Query(value = "select\n" +
             "  fl.id,\n" +
             "  adest.short_name as destAirportShortName,\n" +
@@ -41,11 +44,7 @@ public interface FlightsRepository extends JpaRepository<Flights, Integer> {
             "\t fl.id as  flightId ,\n" +
             "\t count(rlpers.personnel_id) as  qtyPersonnel  \n" +
             "\tfrom flights fl   \n" +
-            "\t  inner join crew_types ct on ct.id = fl.crew_type_id  \n" +
-            "\t  inner join rl_crew_professions rlprof on rlprof.crew_id = fl.crew_type_id\n" +
-            "\t  inner join profession prof on prof.id = rlprof.profession_id\n" +
-            "\t  inner join personnel persons on persons.profession_id = prof.id \n" +
-            "\t  inner join rl_flights_personnel rlpers on rlpers.flight_id = fl.id and rlpers.personnel_id = persons.id \t\n" +
+            "\t  inner join rl_flights_personnel rlpers on rlpers.flight_id = fl.id \t\n" +
             "\t group by fl.id \n" +
             "\t) persons on persons.flightid = prof.flightid  order by adest.short_name ", nativeQuery = true)
     List<FlightsPersonnelDTO> getFlights();

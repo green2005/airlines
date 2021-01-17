@@ -60,12 +60,9 @@ insert into crew_types(name, description)values('clipped', 'clipped crew');
 delete from rl_crew_professions;
 
 insert into rl_crew_professions(crew_id, profession_id) select  crew.id, prof.id from profession prof, crew_types crew where prof.name='pilot' and prof.rank='middle' and crew.name='full'
-insert into rl_crew_professions(crew_id, profession_id) select  crew.id, prof.id from profession prof, crew_types crew where prof.name='pilot' and prof.rank='senior' and crew.name='full'
+insert into rl_crew_professions(crew_id, profession_id) select  crew.id, prof.id from profession prof, crew_types crew where prof.name='pilot' and prof.rank='middle' and crew.name='full'
 insert into rl_crew_professions(crew_id, profession_id) select  crew.id, prof.id from profession prof, crew_types crew where prof.name='navigator' and prof.rank='middle' and crew.name='full'
 insert into rl_crew_professions(crew_id, profession_id) select  crew.id, prof.id from profession prof, crew_types crew where prof.name='air hostess' and prof.rank='middle' and crew.name='full'
-insert into rl_crew_professions(crew_id, profession_id) select  crew.id, prof.id from profession prof, crew_types crew where prof.name='air hostess' and prof.rank='middle' and crew.name='full'
-insert into rl_crew_professions(crew_id, profession_id) select  crew.id, prof.id from profession prof, crew_types crew where prof.name='air hostess' and prof.rank='senior' and crew.name='full'
-insert into rl_crew_professions(crew_id, profession_id) select  crew.id, prof.id from profession prof, crew_types crew where prof.name='radioman' and prof.rank='middle' and crew.name='full'
 
 insert into rl_crew_professions(crew_id, profession_id) select crew.id, prof.id from profession prof, crew_types crew where prof.name='pilot' and prof.rank='middle' and crew.name='clipped'
 insert into rl_crew_professions(crew_id, profession_id) select  crew.id, prof.id from profession prof, crew_types crew where prof.name='navigator' and prof.rank='middle' and crew.name='clipped'
@@ -76,6 +73,7 @@ insert into flights(departure_time, dest_time, crew_type_id, departure_airport_i
 insert into flights(departure_time, dest_time, crew_type_id, departure_airport_id, dest_airport_id) select '2021-02-10 18:30:00', '2021-02-10 23:42:00', ct.id, dep.id, dest.id from crew_types ct, airport dest, airport dep  where ct.name='clipped' and dep.short_name='VAR' and dest.short_name = 'MSQ'
 insert into flights(departure_time, dest_time, crew_type_id, departure_airport_id, dest_airport_id) select '2021-02-12 11:45:00', '2021-02-12 18:10:00', ct.id, dep.id, dest.id from crew_types ct, airport dest, airport dep  where ct.name='full' and dep.short_name='MSQ' and dest.short_name = 'KIT'
 insert into flights(departure_time, dest_time, crew_type_id, departure_airport_id, dest_airport_id) select '2021-02-12 22:45:00', '2021-02-13 02:12:00', ct.id, dep.id, dest.id from crew_types ct, airport dest, airport dep  where ct.name='full' and dep.short_name='KIT' and dest.short_name = 'MSQ'
+insert into flights(departure_time, dest_time, crew_type_id, departure_airport_id, dest_airport_id) select '2021-02-12 16:48:00', '2021-02-12 22:10:00', ct.id, dep.id, dest.id from crew_types ct, airport dest, airport dep  where ct.name='full' and dep.short_name='MSQ' and dest.short_name = 'BER'
 
 delete from rl_flights_personnel;
 

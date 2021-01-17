@@ -3,6 +3,7 @@ package by.epamtraining.airlines.domain;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.Constraint;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

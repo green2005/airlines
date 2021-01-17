@@ -4,14 +4,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <th:block th:insert="fragments/head.html :: js"/>
     <link th:href="@{/styles/footerfix.css}" rel="stylesheet"/>
+
+    <style>
+    .card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+    }
+
+
+
+
+
+
+
+    </style>
+
 </head>
 
 <body>
 <th:block th:insert="fragments/navbar.html" ::navbar/>
-<div class="container">
-    <h3>SomewhereAirlines corp</h3>
 
+<div class="container">
+    <ul>
+        <div th:each="item : ${news}">
+            <div class="card" style="margin:24px">
+                <div class="card-horizontal">
+                    <div class="img-square-wrapper">
+                        <img class="" th:src="${item.imgUrl}" alt="Card image cap">
+                    </div>
+                    <div class="card-body">
+                        <!--<h4 class="card-title">Card title</h4> -->
+                        <p class="card-text">
+                        <li th:text="${item.title}"></li>
+                        <a th:href="${item.url}" title="Sort">
+                            more...
+                        </a>
+                        </p>
+
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">
+                        <li th:text="${item.date}"></li>
+                    </small>
+                </div>
+            </div>
+
+        </div>
+    </ul>
 </div>
-<footer th:insert="fragments/footer.html :: footer"></footer>
+
+<footer>
+
+    <th:block th:insert="fragments/indexpagenav.html" ::footer/>
+
+    <br>
+    <th:block th:insert="fragments/footer.html" ::footer/>
+</footer>
+
 </body>
 </html>

@@ -2,7 +2,6 @@ package by.epamtraining.airlines.controller;
 
 import by.epamtraining.airlines.domain.Personnel;
 import by.epamtraining.airlines.domain.Profession;
-import by.epamtraining.airlines.domain.Sex;
 import by.epamtraining.airlines.exceptions.DomainNotFoundException;
 import by.epamtraining.airlines.service.PersonnelService;
 import by.epamtraining.airlines.service.ProfessionService;
@@ -17,13 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
-import java.util.UnknownFormatConversionException;
 
 import static by.epamtraining.airlines.AppStarter.RECORDS_PER_PAGE;
 

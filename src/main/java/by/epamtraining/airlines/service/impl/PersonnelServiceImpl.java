@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,5 +55,10 @@ public class PersonnelServiceImpl implements PersonnelService {
     @Override
     public void save(Personnel person) {
         personnelRepository.save(person);
+    }
+
+    @Override
+    public List<Personnel> getBusyPersonnel(List<Integer> list, Integer id, Date d1, Date d2) { //List<Personnel> personnelList) {
+        return personnelRepository.getBusyPersonnel(list, id, d1, d2);
     }
 }

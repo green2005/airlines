@@ -86,8 +86,8 @@
             <div class="col-sm-1"></div>
             <div class="col-sm-4">
                 <div class="form-group">
-                    <label for="airhostess">Air hostess:</label>
-                    <select class="form-control" th:field="*{airhostess.id}" id="airhostess" name="airhostess">
+                    <label for="air hostess">Air hostess:</label>
+                    <select class="form-control" th:field="*{air hostess.id}" id="air hostess" name="air hostess">
                         <option th:each="person : ${airhostesslist}" th:value="${person.id}"
                                 th:text="${person.firstName+' '+person.lastName}"></option>
                     </select>
