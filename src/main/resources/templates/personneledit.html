@@ -47,7 +47,8 @@
             <div class="col-sm-4">
                 <div class="form-group">
                     <label for="birthDate">BirthDate:</label>
-                    <input class="form-control" type="date" id="birthDate" th:field="*{personnel.birthDate}">
+                    <input class="form-control" type="date" id="birthDate" name="birthDate"
+                           th:field="*{personnel.birthDate}">
                 </div>
             </div>
 
@@ -56,9 +57,11 @@
                     <label for="gender">Gender:</label>
                     <select class="form-control" id="gender" th:field="*{personnel.gender}">
                         <option th:selected="${personnel.gender==T(by.epamtraining.airlines.domain.Sex).MALE}"
-                                th:value="MALE">Male</option>
+                                th:value="MALE">Male
+                        </option>
                         <option th:selected="${personnel.gender==T(by.epamtraining.airlines.domain.Sex).FEMALE}"
-                                th:value="FEMALE">Female</option>
+                                th:value="FEMALE">Female
+                        </option>
                     </select>
 
                 </div>

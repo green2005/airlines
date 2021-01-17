@@ -1,7 +1,6 @@
 package by.epamtraining.airlines.controller;
 
 import by.epamtraining.airlines.domain.News;
-import by.epamtraining.airlines.helpers.NewsDataProcessor;
 import by.epamtraining.airlines.helpers.NewsDataProvider;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +28,17 @@ public class IndexController {
             model.addAttribute("exception", exception.getMessage());
         }
         return "index";
+    }
+
+    @GetMapping(value = "/login")
+    public String getLogin(){
+
+        return "login";
+    }
+
+    @GetMapping(value = "register")
+    public  String getRegister(){
+        return "register";
     }
 
 }

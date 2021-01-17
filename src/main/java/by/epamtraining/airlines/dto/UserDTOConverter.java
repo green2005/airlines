@@ -23,7 +23,7 @@ public class UserDTOConverter implements Converter<UserRegistrationDTO, User> {
         creds.setUser(user);
         Set<UserCredentials> credentialsSet = new HashSet<>();
         credentialsSet.add(creds);
-        user.setCredentials(credentialsSet);
+        user.setCredentialsSet(credentialsSet);
         return user;
     }
 }

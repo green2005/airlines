@@ -118,12 +118,13 @@ public class PersonnelController {
                 concat(String.format("/?sortfield=%s&sortasc=%b", sortfield, orderAsc));
     }
 
-    @InitBinder
+/*    @InitBinder
     public void initBinder(WebDataBinder binder) {
-        CustomDateEditor editor = new CustomDateEditor(new SimpleDateFormat("dd.MM.yyyy HH:mm"), true);
+        CustomDateEditor editor = new CustomDateEditor(new SimpleDateFormat("dd-MM-yyyy"), true);
+        //CustomDateEditor editor = new CustomDateEditor(new SimpleDateFormat("dd-MM-yyyy HH:mm"), true);
         binder.registerCustomEditor(Date.class, editor);
     }
-
+*/
     @ExceptionHandler({org.springframework.dao.DataIntegrityViolationException.class,
             IllegalArgumentException.class
     })

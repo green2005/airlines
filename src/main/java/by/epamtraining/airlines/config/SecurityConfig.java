@@ -39,8 +39,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //used for Authentication,
-        // but why its not necessary?
         auth.jdbcAuthentication().
                 dataSource(dataSource).
                 passwordEncoder(encoder()).

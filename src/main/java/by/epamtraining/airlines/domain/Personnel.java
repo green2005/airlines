@@ -1,5 +1,7 @@
 package by.epamtraining.airlines.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -27,7 +29,8 @@ public class Personnel {
     @ManyToMany(mappedBy = "flightPersonnel", fetch = FetchType.LAZY)
     List<Flights> flightsPersonnelList;
 
-
+    // @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
 
     private Sex gender;

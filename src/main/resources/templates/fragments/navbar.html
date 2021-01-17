@@ -53,7 +53,7 @@
         </div>
 
         <div sec:authorize="isAuthenticated()">
-            <form class="form-inline my-2 my-lg-0"  dir="rtl"
+            <form class="form-inline my-2 my-lg-0" dir="rtl"
                   th:action="@{/logout}" method="post">
                 <span sec:authentication="principal.username" style="color:#E5E7E9">Hello, guest</span>!
                 <input class="btn btn-outline-success" type="submit" value="Sign Out" style="color:#E5E7E9"/>

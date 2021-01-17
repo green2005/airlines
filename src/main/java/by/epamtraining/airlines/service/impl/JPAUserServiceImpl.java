@@ -2,10 +2,12 @@ package by.epamtraining.airlines.service.impl;
 
 import by.epamtraining.airlines.domain.User;
 import by.epamtraining.airlines.domain.UserCredentials;
+import by.epamtraining.airlines.domain.UserRole;
 import by.epamtraining.airlines.exceptions.DomainNotFoundException;
 import by.epamtraining.airlines.repository.UserRepository;
 import by.epamtraining.airlines.service.EmailService;
 import by.epamtraining.airlines.service.UserService;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class JPAUserServiceImpl implements UserService {
+public class JPAUserServiceImpl implements UserService, InitializingBean {
 
     @Autowired
     UserRepository repository;
@@ -33,7 +35,7 @@ public class JPAUserServiceImpl implements UserService {
 
     @Override
     public void addUser(User user) {
-        UserCredentials credentials = user.getCredentials().stream().findAny().get();
+        UserCredentials credentials = user.getCredentialsSet().stream().findAny().get();
         credentials.setActive(true);
         credentials.setPwd(encoder.encode(credentials.getPwd()));
         user = repository.save(user);
@@ -42,11 +44,11 @@ public class JPAUserServiceImpl implements UserService {
 
     @Override
     public void setUserPwd(User user, String pwd) {
-        user.getCredentials().stream().forEach(cred -> cred.setActive(false));
+        user.getCredentialsSet().stream().forEach(cred -> cred.setActive(false));
         UserCredentials cred = new UserCredentials();
         cred.setActive(true);
         cred.setPwd(encoder.encode(pwd));
-        user.getCredentials().add(cred);
+        user.getCredentialsSet().add(cred);
         cred.setUser(user);
         repository.save(user);
     }
@@ -77,7 +79,7 @@ public class JPAUserServiceImpl implements UserService {
 
     @Override
     public void resetPassword(User user) throws Exception {
-        user.getCredentials().stream().forEach(item -> item.setActive(false));
+        user.getCredentialsSet().stream().forEach(item -> item.setActive(false));
         repository.save(user);
         emailService.sendRestorePwdEmail(user);
     }
@@ -95,5 +97,51 @@ public class JPAUserServiceImpl implements UserService {
     @Override
     public Optional<User> getById(Integer id) {
         return repository.findById(id);
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        addTestUserAccounts();
+
+    }
+
+
+    private void addTestUserAccounts() {
+        User usr = new User();
+        usr.setName("admin");
+        usr.setEmail("admin");
+        usr.setUserRole(UserRole.ADMIN);
+        UserCredentials credentials = new UserCredentials();
+        credentials.setUser(usr);
+        credentials.setPwd("$2a$10$HMchPRNB2LjPsKNfNjGBWucn43bDVtPRZlLSBjsYAh9n3t2YwFHq6"); //crypted "admin" word
+        credentials.setActive(true);
+        usr.addCredentials(credentials);
+        usr.setAccountActivated(true);
+        repository.save(usr);
+
+        usr = new User();
+        usr.setName("user");
+        usr.setEmail("user");
+        usr.setUserRole(UserRole.USER);
+        credentials = new UserCredentials();
+        credentials.setUser(usr);
+        credentials.setPwd("$2a$10$73ZQLjD4c46/L33HLreGmeH1b6n7wmTzSuI4sCMRwvE9QxmWDamJO"); //crypted "user" word
+        credentials.setActive(true);
+        usr.addCredentials(credentials);
+        usr.setAccountActivated(true);
+        repository.save(usr);
+
+        usr = new User();
+        usr.setName("dispatcher");
+        usr.setEmail("dispatcher");
+        usr.setUserRole(UserRole.DISPATCHER);
+        credentials = new UserCredentials();
+        credentials.setUser(usr);
+        credentials.setPwd("$2a$10$jGnBVi/uF2zQOOcq4Z96yetr9fH6RcwcI3FXUDNmEYQkiOxsOYzUK"); //crypted "dispatcher" word
+        credentials.setActive(true);
+        usr.addCredentials(credentials);
+        usr.setAccountActivated(true);
+        repository.save(usr);
+
     }
 }

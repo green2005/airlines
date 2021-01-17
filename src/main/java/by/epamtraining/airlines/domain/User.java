@@ -1,11 +1,8 @@
 package by.epamtraining.airlines.domain;
 
 import javax.persistence.*;
-import javax.validation.Constraint;
 import javax.validation.constraints.Min;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.zip.CRC32;
 import java.util.zip.Checksum;
@@ -26,7 +23,7 @@ public class User {
     private String email;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
-    Set<UserCredentials> credentials = new HashSet<>();
+    private Set<UserCredentials> credentialsSet = new HashSet<>();
 
     public String getCRC() {
         return Long.toString(crc32(String.format("%s;%s", getEmail(), getName())));
@@ -77,11 +74,15 @@ public class User {
         this.email = email;
     }
 
-    public void setCredentials(Set<UserCredentials> credentials) {
-        this.credentials = credentials;
+    public void addCredentials(UserCredentials credentials){
+        credentialsSet.add(credentials);
     }
 
-    public Set<UserCredentials> getCredentials() {
-        return credentials;
+    public void setCredentialsSet(Set<UserCredentials> credentialsSet) {
+        this.credentialsSet = credentialsSet;
+    }
+
+    public Set<UserCredentials> getCredentialsSet() {
+        return credentialsSet;
     }
 }
