@@ -27,6 +27,11 @@ public class ProfessionServiceImpl implements ProfessionService {
     }
 
     @Override
+    public Profession getProfession(String name, String rank) {
+        return professionRepository.findByNameAndRank(name, rank);
+    }
+
+    @Override
     public void saveProfession(Profession profession) {
         professionRepository.save(profession);
     }

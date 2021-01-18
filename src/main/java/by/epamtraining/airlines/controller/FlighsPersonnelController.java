@@ -9,6 +9,7 @@ import by.epamtraining.airlines.service.FlightsPersonnelService;
 import by.epamtraining.airlines.service.FlightsService;
 import by.epamtraining.airlines.service.PersonnelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,17 +36,20 @@ public class FlighsPersonnelController {
         return "flightspersonnel";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
     @PostMapping(value = "/flightspersonnel/delete/{id}")
     public String clearPersonnel(@PathVariable Integer id) {
         flightsPersonnelService.clearPersonnelFromflight(id);
         return "redirect:/flightspersonnel";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
     @GetMapping(value = "/flightspersonnel/edit/{id}")
     public String editPersonnelForFlight(@PathVariable Integer id, Model model) {
         return getViewEditName(id, model, true);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
     @PostMapping(value = "/flightspersonnel/edit")
     public String postPersonnelforFlight(
             HttpServletRequest request,
@@ -111,7 +115,6 @@ public class FlighsPersonnelController {
         Flights flight = flightsService.getById(id).orElseThrow(() -> new DomainNotFoundException());
         List<Personnel> pilotList = personnelService.getByProfession("pilot", "middle");
         List<Personnel> airHostessList = personnelService.getByProfession("air hostess", "middle");
-        List<Personnel> radiomanList = personnelService.getByProfession("radioman", "middle");
         List<Personnel> navigatorList = personnelService.getByProfession("navigator", "middle");
         List<Personnel> personnelList = flight.getFlightPersonnel();
         model.addAttribute("pilotlist", pilotList);
@@ -164,6 +167,4 @@ public class FlighsPersonnelController {
             return "flightpersonneleditfull";
         }
     }
-
-
 }

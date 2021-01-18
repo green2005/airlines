@@ -4,6 +4,7 @@ import by.epamtraining.airlines.domain.Profession;
 import by.epamtraining.airlines.exceptions.DomainNotFoundException;
 import by.epamtraining.airlines.service.ProfessionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -30,6 +31,7 @@ public class ProfessionsController {
         return "professions";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
     @GetMapping(value = {"/professions/edit/{id}", "/professions/edit"})
     public String getProfessionsEdit(@PathVariable(required = false) Integer id, Model model) {
         Profession profession;
@@ -43,12 +45,14 @@ public class ProfessionsController {
         return "professionedit";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
     @PostMapping(value = {"/professions/edit/{id}", "/professions/edit"})
     public String postProfessionsEdit(@PathVariable(required = false) Integer id, @Valid Profession profession) {
         professionService.saveProfession(profession);
         return "redirect:/professions";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
     @PostMapping(value = "/professions/delete/{id}")
     public String getProfessionsDelete(@PathVariable(required = true) Integer id, Model model) {
         professionService.deleteProfession(id);

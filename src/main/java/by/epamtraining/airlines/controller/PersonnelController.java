@@ -6,11 +6,10 @@ import by.epamtraining.airlines.exceptions.DomainNotFoundException;
 import by.epamtraining.airlines.service.PersonnelService;
 import by.epamtraining.airlines.service.ProfessionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import static by.epamtraining.airlines.AppStarter.RECORDS_PER_PAGE;
@@ -31,10 +29,7 @@ public class PersonnelController {
     @Autowired
     ProfessionService professionService;
 
-    /*
-       TODO: uncomment it, need Role checks
-        @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER') or hasRole('ROLE_USER')")
-     */
+
     @GetMapping(value = {"/personnel", "/personnel/{n}"})
     public String getPersonnel(@PathVariable(required = false, name = "n") Integer n,
                                @RequestParam(required = false, name = "sortfield", defaultValue = "lastName") String sortfield,
@@ -58,6 +53,7 @@ public class PersonnelController {
         return "personnellist";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
     @PostMapping(value = "/personnel/delete/{pageno}/{id}")
     public String deleteAirport(@PathVariable(required = false) Integer pageno,
                                 @PathVariable Integer id,
@@ -73,6 +69,7 @@ public class PersonnelController {
                 concat(String.format("/?sortfield=%s&sortasc=%b", sortfield, orderAsc));
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
     @GetMapping(value = {"/personnel/edit/{pageno}/{id}", "/personnel/edit/{pageno}", "/personnel/edit"})
     public String getPersonnelEdit(@PathVariable(required = false) Integer pageno,
                                    @PathVariable(required = false) Integer id,
@@ -97,6 +94,7 @@ public class PersonnelController {
         return "personneledit";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
     @PostMapping(value = {"/personnel/edit/{pageno}/", "/personnel/edit"})
     public String postPersonnelEdit(
             @PathVariable(required = false) Integer pageno,
@@ -118,13 +116,6 @@ public class PersonnelController {
                 concat(String.format("/?sortfield=%s&sortasc=%b", sortfield, orderAsc));
     }
 
-/*    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        CustomDateEditor editor = new CustomDateEditor(new SimpleDateFormat("dd-MM-yyyy"), true);
-        //CustomDateEditor editor = new CustomDateEditor(new SimpleDateFormat("dd-MM-yyyy HH:mm"), true);
-        binder.registerCustomEditor(Date.class, editor);
-    }
-*/
     @ExceptionHandler({org.springframework.dao.DataIntegrityViolationException.class,
             IllegalArgumentException.class
     })

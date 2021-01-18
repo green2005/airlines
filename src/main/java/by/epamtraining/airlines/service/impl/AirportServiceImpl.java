@@ -43,6 +43,11 @@ public class AirportServiceImpl implements AirportService {
     }
 
     @Override
+    public Airport getByShortName(String shortName) {
+        return airportRepository.getByShortName(shortName);
+    }
+
+    @Override
     public long getAirportsCount() {
         return airportRepository.getAirportsCount();
     }

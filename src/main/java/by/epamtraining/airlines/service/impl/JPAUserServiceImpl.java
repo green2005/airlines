@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class JPAUserServiceImpl implements UserService, InitializingBean {
+public class JPAUserServiceImpl implements UserService, InitializingBean{
 
     @Autowired
     UserRepository repository;
@@ -99,14 +99,14 @@ public class JPAUserServiceImpl implements UserService, InitializingBean {
         return repository.findById(id);
     }
 
+
     @Override
     public void afterPropertiesSet() throws Exception {
-        addTestUserAccounts();
-
+        addData();
     }
 
+    public void addData() {
 
-    private void addTestUserAccounts() {
         User usr = new User();
         usr.setName("admin");
         usr.setEmail("admin");

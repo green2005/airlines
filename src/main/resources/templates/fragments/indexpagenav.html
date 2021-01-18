@@ -12,7 +12,7 @@
                 <ul class="pagination">
                     <li class="page-item">
                         <a class="page-link"
-                           th:href="${'/'+{prevurlnom}}"
+                           th:href="${'/index/'+{prevurlnom}}"
                            aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                             <span class="sr-only">Previous</span>
@@ -22,14 +22,14 @@
                         <ul th:if="${pageno == i}" th:remove="tag">
                             <li class="page-item active">
                                 <a class="page-link"
-                                   th:href="${'/'+{i}}">
+                                   th:href="${'/index/'+{i}}">
                                    <span th:text="${i}" th:remove="tag"></span>
                                 </a>
                         </ul>
                         <ul th:if="${pageno != i}" th:remove="tag">
                             <li class="page-item">
                                  <a class="page-link"
-                                    th:href="${'/'+{i}}">
+                                    th:href="${'/index/'+{i}}">
 
                                 <span th:text="${i}" th:remove="tag"></span>
                             </a>
@@ -37,7 +37,7 @@
                     </span>
                     <li class="page-item">
                         <a class="page-link"
-                           th:href="${'/'+{nexturlnom}}"
+                           th:href="${'/index/'+{nexturlnom}}"
                            aria-label="Next">
 
                             <span aria-hidden="true">&raquo;</span>

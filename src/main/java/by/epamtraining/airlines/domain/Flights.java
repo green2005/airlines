@@ -116,6 +116,10 @@ public class Flights {
         return flightPersonnel;
     }
 
+    public void addFlightPersonnel(Personnel personnel) {
+        flightPersonnel.add(personnel);
+    }
+
     public void addFlightPersonnel(List<Personnel> personnelList) {
         flightPersonnel.clear();
         flightPersonnel.addAll(personnelList);

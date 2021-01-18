@@ -23,4 +23,6 @@ public interface PersonnelRepository extends JpaRepository<Personnel, Integer> {
                                      @Param("id") Integer id,
                                      @Param("d1") Date d1,
                                      @Param("d2") Date d2);
+
+    List<Personnel> getByLastName(String lastName);
 }

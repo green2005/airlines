@@ -13,6 +13,8 @@ public interface AirportService {
 
     Optional<Airport> getById(int id);
 
+    Airport getByShortName(String shortName);
+
     long getAirportsCount();
 
     void deleteById(int id);

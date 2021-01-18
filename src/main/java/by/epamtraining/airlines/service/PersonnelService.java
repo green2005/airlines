@@ -20,5 +20,7 @@ public interface PersonnelService {
 
     void save(Personnel person);
 
+    List<Personnel> getByLastName(String lastName);
+
     List<Personnel> getBusyPersonnel(List<Integer> list, Integer id, Date d1, Date d2);//List<Personnel> personnelList);
 }

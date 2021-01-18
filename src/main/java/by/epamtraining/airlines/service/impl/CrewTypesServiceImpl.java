@@ -20,4 +20,14 @@ public class CrewTypesServiceImpl implements CrewTypesService {
     public List<CrewTypes> getCrewTypes() {
         return crewTypeRepository.findAll(Sort.by("name"));
     }
+
+    @Override
+    public void add(CrewTypes ct) {
+        crewTypeRepository.save(ct);
+    }
+
+    @Override
+    public CrewTypes findByName(String name) {
+        return crewTypeRepository.findByName(name);
+    }
 }

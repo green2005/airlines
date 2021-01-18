@@ -24,13 +24,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().
-                antMatchers("/**", "/", "/home").
-                permitAll().and().
+
+        http.authorizeRequests()
+                .antMatchers("/", "/index", "/index/{n}",
+                        "/home", "/register", "/register/**", "/activate/**", "/webjars/**").
+                permitAll()
+                .anyRequest().authenticated().and().
                 formLogin().
                 loginPage("/login").
                 permitAll().
-                defaultSuccessUrl("/").
+                defaultSuccessUrl("/index").
                 and().
                 logout().
                 and().

@@ -10,6 +10,8 @@ public interface ProfessionService {
 
     Optional<Profession> getProfessionById(int id);
 
+    Profession getProfession(String name, String rank);
+
     void saveProfession(Profession profession);
 
     void deleteProfession(int id);

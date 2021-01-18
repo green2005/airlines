@@ -33,6 +33,10 @@ public class CrewTypes {
         return professions;
     }
 
+    public void addProfession(Profession profession){
+        this.professions.add(profession);
+    }
+
     public void setProfessions(List<Profession> professions) {
         this.professions = professions;
     }

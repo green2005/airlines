@@ -77,6 +77,8 @@ insert into flights(departure_time, dest_time, crew_type_id, departure_airport_i
 
 delete from rl_flights_personnel;
 
+
 insert into rl_flights_personnel(personnel_id, flight_id)select pilot1.id, fl.id from crew_types cr, personnel pilot1, flights fl, profession prof where cr.name='clipped' and pilot1.profession_id=prof.id and fl.crew_type_id = cr.id  and prof.name = 'pilot' and rank='middle' order by pilot1.first_name limit 1;
 insert into rl_flights_personnel(personnel_id, flight_id) select pilot1.id, fl.id from crew_types cr, personnel pilot1, flights fl, profession prof    where cr.name='clipped' and pilot1.profession_id=prof.id and fl.crew_type_id = cr.id  and prof.name = 'navigator' and rank='middle' order by pilot1.first_name limit 1;
 insert into rl_flights_personnel(personnel_id, flight_id) select pilot1.id, fl.id from crew_types cr, personnel pilot1, flights fl, profession prof    where cr.name='clipped' and pilot1.profession_id=prof.id and fl.crew_type_id = cr.id  and prof.name = 'air hostess' and rank='middle' order by pilot1.first_name limit 1;
+ 

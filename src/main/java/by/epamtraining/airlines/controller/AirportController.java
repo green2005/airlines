@@ -5,11 +5,11 @@ import by.epamtraining.airlines.exceptions.DomainNotFoundException;
 import by.epamtraining.airlines.service.AirportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -20,6 +20,7 @@ public class AirportController {
 
     @Autowired
     private AirportService airportService;
+
 
     @GetMapping(value = {"/airports", "/airports/{n}"})
     public String getAirports(@PathVariable(required = false, name = "n") Integer n,
@@ -44,6 +45,7 @@ public class AirportController {
         return "airportlist";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
     @GetMapping(value = {"/airports/edit/{pageno}/{id}", "/airports/edit", "/airports/edit/{pageno}"})
     public String getAirportsEdit(@PathVariable(required = false) Integer pageno,
                                   @PathVariable(required = false) Integer id,
@@ -66,6 +68,7 @@ public class AirportController {
         return "airportedit";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
     @PostMapping(value = {"/airports/edit/{pageno}", "/airports/edit"})
     public String postAirportsEdit(@PathVariable(required = false) Integer pageno,
                                    @RequestParam(required = false, name = "sortfield", defaultValue = "shortName") String sortfield,
@@ -80,6 +83,7 @@ public class AirportController {
                 concat(String.format("/?sortfield=%s&sortasc=%b", sortfield, orderAsc));
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
     @PostMapping(value = "/airports/delete/{pageno}/{id}")
     public String deleteAirport(@PathVariable(required = false) Integer pageno,
                                 @PathVariable Integer id,

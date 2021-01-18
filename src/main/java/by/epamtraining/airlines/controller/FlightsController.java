@@ -9,11 +9,11 @@ import by.epamtraining.airlines.service.CrewTypesService;
 import by.epamtraining.airlines.service.FlightsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -42,7 +42,6 @@ public class FlightsController {
             n = 1;
         }
         Page<Flights> flightsPage = flightsService.getFlights(n, RECORDS_PER_PAGE, sortfield, orderAsc);
-       // List<FlightsDTO> fl = flightsService.getFlightsDTO();
         int totalPageqty = flightsPage.getTotalPages();
         if ((n > totalPageqty) && (totalPageqty > 0)) {
             n = totalPageqty;
@@ -57,6 +56,7 @@ public class FlightsController {
         return "flights";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
     @PostMapping(value = "/flights/delete/{pageno}/{id}")
     public String deleteAirport(@PathVariable(required = false) Integer pageno,
                                 @PathVariable Integer id,
@@ -72,6 +72,7 @@ public class FlightsController {
                 concat(String.format("/?sortfield=%s&sortasc=%b", sortfield, orderAsc));
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
     @GetMapping(value = {"/flights/edit/{pageno}/{id}", "/flights/edit", "/flights/edit/{pageno}"})
     public String getFlightsEdit(@PathVariable(required = false) Integer pageno,
                                  @PathVariable(required = false) Integer id,
@@ -98,6 +99,7 @@ public class FlightsController {
         return "flightsedit";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
     @PostMapping(value = {"/flights/edit/{pageno}", "/flights/edit"})
     public String postAirportsEdit(@PathVariable(required = false) Integer pageno,
                                    @RequestParam(required = false, name = "sortfield", defaultValue = "departureTime") String sortfield,

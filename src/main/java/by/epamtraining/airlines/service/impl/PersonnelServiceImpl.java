@@ -58,6 +58,11 @@ public class PersonnelServiceImpl implements PersonnelService {
     }
 
     @Override
+    public List<Personnel> getByLastName(String lastName) {
+        return personnelRepository.getByLastName(lastName);
+    }
+
+    @Override
     public List<Personnel> getBusyPersonnel(List<Integer> list, Integer id, Date d1, Date d2) { //List<Personnel> personnelList) {
         return personnelRepository.getBusyPersonnel(list, id, d1, d2);
     }

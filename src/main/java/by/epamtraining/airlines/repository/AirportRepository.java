@@ -7,4 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 public interface AirportRepository extends JpaRepository<Airport, Integer> {
     @Query("select count(*) from Airport a")
     long getAirportsCount();
+
+    Airport getByShortName(String shortName);
 }
