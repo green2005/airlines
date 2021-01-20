@@ -6,15 +6,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import by.epamtraining.airlines.domain.News;
+import by.epamtraining.airlines.domain.NewsArticle;
 import by.epamtraining.airlines.exceptions.IncorrectJSONException;
 import org.json.*;
 
 public class NewsDataProcessor {
     private static final String INCORRECT_JSON_MSG = "Incorrect JSON";
 
-    public List<News> getVKData(String jsonStr) throws IncorrectJSONException {
-        List<News> resultList = new ArrayList();
+    public List<NewsArticle> getVKData(String jsonStr) throws IncorrectJSONException {
+        List<NewsArticle> resultList = new ArrayList();
         JSONObject mainJO;
         try {
             mainJO = new JSONObject(jsonStr);
@@ -28,10 +28,10 @@ public class NewsDataProcessor {
                 if (item == null) {
                     throw new IncorrectJSONException(INCORRECT_JSON_MSG);
                 }
-                News post = new News();
-                post.setId(item.optInt("id") + "");
+                NewsArticle post = new NewsArticle();
+                post.setVkId(item.optInt("id") + "");
                 post.setTitle(item.optString("text"));
-                post.setUrl(API.getPostUrl(post.getId()));
+                post.setUrl(API.getPostUrl(post.getVkId()));
                 fillAttachmentsUrl(post, item);
                 post.setDate(new SimpleDateFormat("YYYY-MM-dd-HH:mm:ss").format(new Date(Integer.parseInt(item.optString("date")) * 1000L)));
                 resultList.add(post);
@@ -42,7 +42,7 @@ public class NewsDataProcessor {
         return resultList;
     }
 
-    private void fillAttachmentsUrl(News post, JSONObject item) {
+    private void fillAttachmentsUrl(NewsArticle post, JSONObject item) {
         JSONArray attachments = item.optJSONArray("attachments");
         if (attachments != null) {
             for (int i = 0; i < attachments.length(); i++) {

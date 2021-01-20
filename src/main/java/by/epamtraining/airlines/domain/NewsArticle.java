@@ -1,12 +1,22 @@
 package by.epamtraining.airlines.domain;
 
-public class News {
+import javax.persistence.*;
+
+@Entity
+public class NewsArticle {
+    @Id
+    private String vkId;
+
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private int id;
+
+    @Column(length = 2000)
     private String title;
-    private String id;
     private String url;
     private String imgUrl;
     private String videoUrl;
     private String date;
+    private int num;
 
     public String getTitle() {
         return title;
@@ -16,12 +26,12 @@ public class News {
         this.title = title;
     }
 
-    public String getId() {
-        return id;
+    public String getVkId() {
+        return vkId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setVkId(String vkId) {
+        this.vkId = vkId;
     }
 
     public String getUrl() {
@@ -54,5 +64,21 @@ public class News {
 
     public void setVideoUrl(String videoUrl) {
         this.videoUrl = videoUrl;
+    }
+
+  //  public int getId() {
+  //      return id;
+  //  }
+
+   // public void setId(int id) {
+  //      this.id = id;
+   // }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
     }
 }
