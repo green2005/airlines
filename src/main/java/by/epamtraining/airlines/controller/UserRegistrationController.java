@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
 
@@ -26,7 +27,15 @@ public class UserRegistrationController {
     }
 
     @PostMapping(value = "/register/new")
-    public String register(UserRegistrationDTO userDto) {
+    public String register(UserRegistrationDTO userDto, Model model, RedirectAttributes ra) {
+        User usr = userService.getByEmail(userDto.getEmail());
+        if (usr != null) {
+            model.addAttribute("exception", "User already exists");
+            model.addAttribute("email", userDto.getEmail());
+            model.addAttribute("name", userDto.getName());
+            return "register";
+        }
+        ra.addAttribute("msg", "User has been registered. Check your email.");
         userService.addUser(new UserDTOConverter().convert(userDto));
         return "redirect:/login";
     }
@@ -66,8 +75,7 @@ public class UserRegistrationController {
                                @RequestParam(name = "password2", required = false) String pwd2,
                                Model model) throws Exception {
         if ((pwd1 == null) || (!pwd1.equals(pwd2))) {
-            model.addAttribute("error", "pwdsnotequal");
-            //TODO: hanlde error in html
+            model.addAttribute("exception", "pwdsnotequal");
             return "passwordresetlast";
         }
         User user = userService.getByEmail(email);

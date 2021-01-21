@@ -104,6 +104,7 @@ public class AirportController {
     ) {/*
         process duplicates, some fields should be unique
        */
+
         ModelAndView model = new ModelAndView("airportedit");
         Airport airport = new Airport();
         model.addObject("sortfield", request.getParameter("sortfield"));
