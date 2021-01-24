@@ -10,7 +10,6 @@ public class UserCredentials {
     private int id;
 
     @Column(updatable = false)
-    @Min(value = 3)
     private String pwd;
 
     @ManyToOne

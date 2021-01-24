@@ -19,24 +19,23 @@
 
 <div class="container">
     <form th:action="${'/personnel/edit/'+{pageno}+'/?sortfield='+{sortfield}+'&sortasc='+{sortasc}}"
+          th:object="${personnelDTO}"
           method="post">
         <div class="row">
             <div class="col-sm-1"></div>
             <div class="col-sm-4">
                 <div class="form-group">
                     <label for="firstName">FirstName:</label>
-                    <input type="text" class="form-control" id="firstName" th:field="*{personnel.firstName}"
-                           minlength=3 maxlength=55 required
-                    >
+                    <input type="text" class="form-control" id="firstName" th:field="*{firstName}">
+                    <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">firstName error</p>
                 </div>
             </div>
 
             <div class="col-sm-4">
                 <div class="form-group">
                     <label for="lastName">LastName:</label>
-                    <input type="text" class="form-control" id="lastName" th:field="*{personnel.lastName}"
-                           minlength=3 maxlength=55 required
-                    >
+                    <input type="text" class="form-control" id="lastName" th:field="*{lastName}">
+                    <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">lastName error</p>
                 </div>
             </div>
         </div>
@@ -48,18 +47,19 @@
                 <div class="form-group">
                     <label for="birthDate">BirthDate:</label>
                     <input class="form-control" type="date" id="birthDate" name="birthDate"
-                           th:field="*{personnel.birthDate}">
+                           th:field="*{birthDate}">
+                    <p th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}">birthDate error</p>
                 </div>
             </div>
 
             <div class="col-sm-4">
                 <div class="form-group">
                     <label for="gender">Gender:</label>
-                    <select class="form-control" id="gender" th:field="*{personnel.gender}">
-                        <option th:selected="${personnel.gender==T(by.epamtraining.airlines.domain.Sex).MALE}"
+                    <select class="form-control" id="gender" th:field="*{gender}">
+                        <option th:selected="${gender==T(by.epamtraining.airlines.domain.Sex).MALE}"
                                 th:value="MALE">Male
                         </option>
-                        <option th:selected="${personnel.gender==T(by.epamtraining.airlines.domain.Sex).FEMALE}"
+                        <option th:selected="${gender==T(by.epamtraining.airlines.domain.Sex).FEMALE}"
                                 th:value="FEMALE">Female
                         </option>
                     </select>
@@ -74,7 +74,7 @@
             <div class="col-sm-4">
                 <div class="form-group">
                     <label for="profession">Profession:</label>
-                    <select class="form-control" th:field="${personnel.profession.id}" id="profession">
+                    <select class="form-control" th:field="*{profession.id}" id="profession">
                         <option th:each="profession : ${professions}" th:value="${profession.id}"
                                 th:text="${profession.name+' '+profession.rank}"></option>
                     </select>
@@ -84,7 +84,7 @@
 
         <div class=" row">
             <div class="col-sm-1"></div>
-            <input type="hidden" class="form-control" id="id" th:field="*{personnel.id}">
+            <input type="hidden" class="form-control" id="id" th:field="*{id}">
         </div>
         <div class="row">
             <div class="col-sm-1"></div>

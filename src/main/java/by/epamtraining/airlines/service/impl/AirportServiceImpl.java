@@ -1,6 +1,7 @@
 package by.epamtraining.airlines.service.impl;
 
 import by.epamtraining.airlines.domain.Airport;
+import by.epamtraining.airlines.dto.AirportDTO;
 import by.epamtraining.airlines.repository.AirportRepository;
 import by.epamtraining.airlines.service.AirportService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class AirportServiceImpl implements AirportService {
     public List<Airport> getAirports() {
         return airportRepository.findAll(Sort.by("shortName"));
     }
+
 
     @Override
     public Page<Airport> getAirports(Integer pageN, Integer pageSize, String sortField, Boolean sortAsc) {

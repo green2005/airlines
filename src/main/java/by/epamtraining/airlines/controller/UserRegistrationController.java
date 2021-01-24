@@ -3,15 +3,20 @@ package by.epamtraining.airlines.controller;
 import by.epamtraining.airlines.domain.User;
 import by.epamtraining.airlines.dto.UserDTOConverter;
 import by.epamtraining.airlines.dto.UserRegistrationDTO;
+import by.epamtraining.airlines.exceptions.IncorrectUserInfoException;
 import by.epamtraining.airlines.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
@@ -26,17 +31,26 @@ public class UserRegistrationController {
         return "redirect:/login";
     }
 
-    @PostMapping(value = "/register/new")
-    public String register(UserRegistrationDTO userDto, Model model, RedirectAttributes ra) {
-        User usr = userService.getByEmail(userDto.getEmail());
-        if (usr != null) {
-            model.addAttribute("exception", "User already exists");
-            model.addAttribute("email", userDto.getEmail());
-            model.addAttribute("name", userDto.getName());
+    @GetMapping(value = "/register")
+    public String getRegister(UserRegistrationDTO userRegistrationDTO, Model model) {
+        return "register";
+    }
+
+    @PostMapping(value = "/register")
+    public String register(@Valid UserRegistrationDTO userRegistrationDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            userRegistrationDTO.setPassword("");
+            userRegistrationDTO.setPassword2("");
             return "register";
         }
-        ra.addAttribute("msg", "User has been registered. Check your email.");
-        userService.addUser(new UserDTOConverter().convert(userDto));
+        if (!userRegistrationDTO.getPassword().equals(userRegistrationDTO.getPassword2())) {
+            throw new IncorrectUserInfoException("Passwords are not equal");
+        }
+        User usr = userService.getByEmail(userRegistrationDTO.getEmail());
+        if (usr != null) {
+            throw new IncorrectUserInfoException("User already exists");
+        }
+        userService.addUser(new UserDTOConverter().convert(userRegistrationDTO));
         return "redirect:/login";
     }
 
@@ -83,4 +97,17 @@ public class UserRegistrationController {
 
         return "redirect:/login";
     }
+
+    @ExceptionHandler({org.springframework.dao.DataIntegrityViolationException.class, IncorrectUserInfoException.class})
+    public ModelAndView errorHandler(HttpServletRequest request, Exception e
+    ) {
+        ModelAndView model = new ModelAndView("register");
+        UserRegistrationDTO user = new UserRegistrationDTO();
+        user.setEmail(request.getParameter("email"));
+        user.setName(request.getParameter("name"));
+        model.addObject("exception", e.getLocalizedMessage());
+        model.addObject("userRegistrationDTO", user);
+        return model;
+    }
+
 }

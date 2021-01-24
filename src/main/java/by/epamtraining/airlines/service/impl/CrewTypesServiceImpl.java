@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -29,5 +30,10 @@ public class CrewTypesServiceImpl implements CrewTypesService {
     @Override
     public CrewTypes findByName(String name) {
         return crewTypeRepository.findByName(name);
+    }
+
+    @Override
+    public Optional<CrewTypes> findById(int id) {
+        return crewTypeRepository.findById(id);
     }
 }

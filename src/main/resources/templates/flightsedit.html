@@ -10,22 +10,25 @@
 </head>
 <body>
 
-<div th:if="${exception!=null}" th:remove="tag">
-    <div class="alert alert-warning" role="alert">
-        error:
-        <p th:text="${exception}"></p>
-    </div>
-</div>
 
 <div class="container">
+    <div th:if="${exception!=null}" th:remove="tag">
+        <div class="alert alert-warning" role="alert">
+            error:
+            <p th:text="${exception}"></p>
+        </div>
+    </div>
     <form th:action="${'/flights/edit/'+{pageno}+'/?sortfield='+{sortfield}+'&sortasc='+{sortasc}}"
+          th:object="${flightsDTO}"
           method="post">
         <div class="row">
             <div class="col-sm-1"></div>
             <div class="col-sm-4">
                 <div class="form-group">
                     <label for="deptime">Departure time:</label>
-                    <input class="form-control" type="datetime-local" id="deptime" th:field="*{flight.departureTime}">
+                    <input class="form-control" type="datetime-local" id="deptime" th:field="*{departureTime}">
+                    <p th:if="${#fields.hasErrors('departureTime')}" th:errors="*{departureTime}">departureTime
+                        error</p>
                 </div>
             </div>
 
@@ -33,7 +36,8 @@
                 <div class="form-group">
                     <label for="desttime">Destination time:</label>
                     <input class="form-control" type="datetime-local" id="desttime"
-                           th:field="*{flight.destTime}">
+                           th:field="*{destTime}">
+                    <p th:if="${#fields.hasErrors('destTime')}" th:errors="*{destTime}">destTime error</p>
                 </div>
             </div>
         </div>
@@ -42,18 +46,21 @@
             <div class="col-sm-1"></div>
             <div class="col-sm-4">
                 <label for="dept">Departure airport:</label>
-                <select class="form-control" th:field="${flight.departureAirport.id}" id="dept">
+                <select class="form-control" th:field="*{departureAirport.id}" id="dept">
                     <option th:each="airport : ${airports}" th:value="${airport.id}"
                             th:text="${airport.shortName+' '+airport.fullName}"></option>
                 </select>
+                <p th:if="${#fields.hasErrors('departureAirport')}" th:errors="*{departureAirport}">departureAirport
+                    error</p>
             </div>
 
             <div class="col-sm-4">
                 <label for="dest">Destination airport:</label>
-                <select class="form-control" th:field="${flight.destAirport.id}" id="dest">
+                <select class="form-control" th:field="*{destAirport.id}" id="dest">
                     <option th:each="airport : ${airports}" th:value="${airport.id}"
                             th:text="${airport.shortName+' '+airport.fullName}"></option>
                 </select>
+                <p th:if="${#fields.hasErrors('destAirport')}" th:errors="*{destAirport}">destAirport error</p>
             </div>
         </div>
 
@@ -62,12 +69,12 @@
             <div class="col-sm-1"></div>
             <div class="col-sm-4">
                 <label for="ct">Crew type:</label>
-                <select class="form-control" th:field="${flight.crewType.id}" id="ct">
+                <select class="form-control" th:field="*{crewType.id}" id="ct">
                     <option th:each="crewtype : ${crewTypes}" th:value="${crewtype.id}"
                             th:text="${crewtype.name}"></option>
                 </select>
             </div>
-            <input type="hidden" class="form-control" id="id" th:field="*{flight.id}">
+            <input type="hidden" class="form-control" id="id" th:field="*{id}">
         </div>
 
         <br>

@@ -3,6 +3,7 @@ package by.epamtraining.airlines.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -17,6 +18,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableScheduling
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -28,13 +30,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/", "/index", "/index/{n}",
                         "/home", "/register", "/register/**", "/activate/**",
-                        "/webjars/**", "/images/**").
+                        "/**",
+                        "/webjars/**", "/images/**", "/test", "/test/").
                 permitAll()
                 .anyRequest().authenticated().and().
                 formLogin().
                 loginPage("/login").
                 permitAll().
-                defaultSuccessUrl("/index").
+                defaultSuccessUrl("/").
                 and().
                 logout().
                 and().

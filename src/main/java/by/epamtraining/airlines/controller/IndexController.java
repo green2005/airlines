@@ -20,7 +20,7 @@ public class IndexController {
     @Autowired
     NewsArticleService newsService;
 
-    private static final int NEWS_PAGE_COUNT = 10;
+    public static final int NEWS_PAGE_COUNT = 10;
 
     @GetMapping(value = {"/", "/index", "/{n}", "/index/{n}"})
     public String getIndexPage(@PathVariable(required = false, name = "n") Integer n,
@@ -45,10 +45,4 @@ public class IndexController {
     public String getLogin(Model model) {
         return "login";
     }
-
-    @GetMapping(value = "register")
-    public String getRegister() {
-        return "register";
-    }
-
 }

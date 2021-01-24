@@ -1,13 +1,14 @@
 package by.epamtraining.airlines.service;
 
 import by.epamtraining.airlines.domain.CrewTypes;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface CrewTypesService {
-    public List<CrewTypes> getCrewTypes();
-    public void add(CrewTypes ct);
-    public CrewTypes findByName(String name);
+    List<CrewTypes> getCrewTypes();
+    void add(CrewTypes ct);
+    CrewTypes findByName(String name);
+    Optional<CrewTypes> findById(int id);
 }

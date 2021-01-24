@@ -1,37 +1,55 @@
-package by.epamtraining.airlines.domain;
+package by.epamtraining.airlines.dto;
 
-import javax.persistence.*;
+import by.epamtraining.airlines.domain.Airport;
+
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.List;
 
-@Entity
-public class Airport {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class AirportDTO {
+
     private int id;
 
-    @Column(unique = true)
+    @NotNull
+    @Size(min = 3, max = 5)
     private String shortName;
 
-    @Column(unique = true)
+    @NotNull
+    @Size(min = 3, max = 50)
     private String fullName;
 
+    @NotNull
+    @Size(min = 2, max = 50)
     private String country;
 
+    @NotNull
+    @Size(min = 3, max = 50)
     private String city;
 
     private String slat;
 
     private String slon;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "destAirport")
-    private List<Flights> flightsDest;
+    public AirportDTO() {
+    }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "departureAirport")
-    private List<Flights> flightsDeparture;
+    ;
+
+    public AirportDTO(Airport airport) {
+        id = airport.getId();
+        slat = airport.getSlat();
+        slon = airport.getSlon();
+        fullName = airport.getFullName();
+        shortName = airport.getShortName();
+        country = airport.getCountry();
+        city = airport.getCity();
+    }
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getShortName() {
@@ -58,6 +76,14 @@ public class Airport {
         this.country = country;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     public String getSlat() {
         return slat;
     }
@@ -72,17 +98,5 @@ public class Airport {
 
     public void setSlon(String slon) {
         this.slon = slon;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 }

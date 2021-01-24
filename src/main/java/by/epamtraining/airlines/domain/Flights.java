@@ -26,7 +26,7 @@ public class Flights {
     @JoinColumn(name = "crewTypeId")
     private CrewTypes crewType;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinTable(name = "rlFlightsPersonnel",
             joinColumns = @JoinColumn(name = "flightId"),
             inverseJoinColumns = @JoinColumn(name = "personnelId")

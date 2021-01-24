@@ -19,24 +19,23 @@
 
 <div class="container">
     <form th:action="${'/airports/edit/'+{pageno}+'/?sortfield='+{sortfield}+'&sortasc='+{sortasc}}"
+          th:object="${airportDTO}"
           method="post">
         <div class="row">
             <div class="col-sm-1"></div>
             <div class="col-sm-4">
                 <div class="form-group">
                     <label for="country">Country:</label>
-                    <input type="text" class="form-control" id="country" th:field="*{airport.country}"
-                           minlength=3 maxlength=55 required
-                    >
+                    <input type="text" class="form-control" id="country" th:field="*{country}">
+                    <p th:if="${#fields.hasErrors('country')}" th:errors="*{country}">country error</p>
                 </div>
             </div>
 
             <div class="col-sm-4">
                 <div class="form-group">
                     <label for="city">City:</label>
-                    <input type="text" class="form-control" id="city" th:field="*{airport.city}"
-                           minlength=3 maxlength=55 required
-                    >
+                    <input type="text" class="form-control" id="city" th:field="*{city}">
+                    <p th:if="${#fields.hasErrors('city')}" th:errors="*{city}">city error</p>
                 </div>
             </div>
 
@@ -47,9 +46,8 @@
             <div class="col-sm-4">
                 <div class="form-group">
                     <label for="fullname">Airport fullname:</label>
-                    <input type="text" class="form-control" id="fullname" th:field="*{airport.fullName}"
-                           minlength=3 maxlength=25 required
-                    >
+                    <input type="text" class="form-control" id="fullname" th:field="*{fullName}">
+                    <p th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}">fullname error</p>
                 </div>
             </div>
 
@@ -57,12 +55,10 @@
                 <div class="form-group">
                     <label for="iata">IATA:</label>
                     <input type="text"
-                           minlength=3 maxlength=5
-                           required
                            class="form-control"
                            id="iata"
-                           th:field="*{airport.shortName}"
-                    >
+                           th:field="*{shortName}">
+                    <p th:if="${#fields.hasErrors('shortName')}" th:errors="*{shortName}">shortName error</p>
                 </div>
             </div>
         </div>
@@ -72,25 +68,26 @@
             <div class="col-sm-4">
                 <div class="form-group">
                     <label for="lat">LAT:</label>
-                    <input type="number" class="form-control" id="lat" th:field="*{airport.slat}"
+                    <input type="number" class="form-control" id="lat" th:field="*{slat}"
                            min=-80
                            max=80
                            step=0.00000001
                     >
+                    <p th:if="${#fields.hasErrors('slat')}" th:errors="*{slat}">slat error</p>
                 </div>
             </div>
 
             <div class="col-sm-4">
                 <div class="form-group">
                     <label for="lon">LON:</label>
-                    <input type="number" class="form-control" id="lon" th:field="*{airport.slon}"
+                    <input type="number" class="form-control" id="lon" th:field="*{slon}"
                            min=-60
                            max=180
-                           step=0.00000001
-                    >
+                           step=0.00000001>
+                    <p th:if="${#fields.hasErrors('slon')}" th:errors="*{slon}">slon error</p>
                 </div>
             </div>
-            <input type="hidden" class="form-control" id="id" th:field="*{airport.id}">
+            <input type="hidden" class="form-control" id="id" th:field="*{id}">
         </div>
         <div class="row">
             <div class="col-sm-1"></div>

@@ -144,14 +144,20 @@
             </div>
             <td th:text="${person.gender}"/>
             <td>
-                <form th:action="${'/personnel/edit/'+{pageno}+'/'+{person.id}+'/?sortfield='+{sortfield}+'&sortasc='+{sortasc}}"
+                <!--<form th:action="${'/personnel/edit/'+{pageno}+'/'+{person.id}+'/?sortfield='+{sortfield}+'&sortasc='+{sortasc}}"
                       th:method="get">
                     <button type="submit" data-toggle="modal"
                             data-target="#edit" data-uid="1"
                             class="update btn btn-warning btn-sm"
                     ><span class="glyphicon glyphicon-pencil"></span>
                     </button>
-                </form>
+                </form>-->
+                <div class="btn-group">
+                    <a th:href="${'/personnel/edit/'+{pageno}+'/'+{person.id}+'/?sortfield='+{sortfield}+'&sortasc='+{sortasc}}"
+                       class="btn btn-warning btn-sm">
+                        <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>
+                    </a>
+                </div>
             </td>
             <td>
                 <form action="#"

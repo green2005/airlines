@@ -2,6 +2,7 @@ package by.epamtraining.airlines.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.zip.CRC32;
@@ -13,12 +14,13 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Min(value = 3)
+
+    @NotNull
     private String name;
 
     private boolean accountActivated = false;
 
-    @Min(value = 5)
+    @NotNull
     @Column(unique = true)
     private String email;
 
