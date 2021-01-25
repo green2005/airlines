@@ -36,20 +36,20 @@ public class FlighsPersonnelController {
         return "flightspersonnel";
     }
 
-    //@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
     @PostMapping(value = "/flightspersonnel/delete/{id}")
     public String clearPersonnel(@PathVariable Integer id) {
         flightsPersonnelService.clearPersonnelFromflight(id);
         return "redirect:/flightspersonnel";
     }
 
-   // @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
     @GetMapping(value = "/flightspersonnel/edit/{id}")
     public String editPersonnelForFlight(@PathVariable Integer id, Model model) {
         return getViewEditName(id, model, true);
     }
 
-    //@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
     @PostMapping(value = "/flightspersonnel/edit")
     public String postPersonnelforFlight(
             HttpServletRequest request,

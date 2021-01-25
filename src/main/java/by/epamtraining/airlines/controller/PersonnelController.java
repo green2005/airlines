@@ -61,7 +61,7 @@ public class PersonnelController {
         return "personnellist";
     }
 
-    //  @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
     @PostMapping(value = "/personnel/delete/{pageno}/{id}")
     public String deleteAirport(@PathVariable(required = false) Integer pageno,
                                 @PathVariable Integer id,
@@ -77,7 +77,7 @@ public class PersonnelController {
                 concat(String.format("/?sortfield=%s&sortasc=%b", sortfield, orderAsc));
     }
 
-    // @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
     @GetMapping(value = {"/personnel/edit/{pageno}/{id}", "/personnel/edit/{pageno}", "/personnel/edit"})
     public String getPersonnelEdit(@PathVariable(required = false) Integer pageno,
                                    @PathVariable(required = false) Integer id,
@@ -102,7 +102,7 @@ public class PersonnelController {
         return "personneledit";
     }
 
-    //  @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
     @PostMapping(value = {"/personnel/edit/{pageno}/", "/personnel/edit"})
     public String postPersonnelEdit(
             @PathVariable(required = false) Integer pageno,

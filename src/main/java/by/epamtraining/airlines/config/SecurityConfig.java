@@ -30,7 +30,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/", "/index", "/index/{n}",
                         "/home", "/register", "/register/**", "/activate/**",
-                        "/**",
                         "/webjars/**", "/images/**", "/test", "/test/").
                 permitAll()
                 .anyRequest().authenticated().and().

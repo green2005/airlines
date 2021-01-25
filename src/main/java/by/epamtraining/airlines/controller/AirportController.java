@@ -56,7 +56,7 @@ public class AirportController {
         return "airportlist";
     }
 
-    //   @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
     @GetMapping(value = {"/airports/edit/{pageno}/{id}", "/airports/edit/{pageno}"})
     public String getAirportsEdit(@PathVariable(required = false) Integer pageno,
                                   @PathVariable(required = false) Integer id,
@@ -81,7 +81,7 @@ public class AirportController {
         return "airportedit";
     }
 
-    //  @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
     @PostMapping(value = {"/airports/edit/{pageno}", "/airports/edit"})
     public String postAirportsEdit(@PathVariable(required = false) Integer pageno,
                                    @RequestParam(required = false, name = "sortfield", defaultValue = "shortName") String sortfield,
@@ -107,7 +107,7 @@ public class AirportController {
                 concat(String.format("/?sortfield=%s&sortasc=%b", sortfield, orderAsc));
     }
 
-    //  @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DISPATCHER')")
     @PostMapping(value = "/airports/delete/{pageno}/{id}")
     public String deleteAirport(@PathVariable(required = false) Integer pageno,
                                 @PathVariable Integer id,
