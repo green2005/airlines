@@ -20,7 +20,7 @@ public interface PersonnelRepository extends JpaRepository<Personnel, Integer> {
             " (:d2 BETWEEN fl.departureTime AND fl.destTime)) "
     )
     List<Personnel> getBusyPersonnel(@Param("list") List<Integer> list,
-                                     @Param("id") Integer id,
+                                     @Param("id") Integer flightId,
                                      @Param("d1") Date d1,
                                      @Param("d2") Date d2);
 
