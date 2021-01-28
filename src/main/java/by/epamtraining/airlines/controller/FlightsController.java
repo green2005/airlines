@@ -7,7 +7,7 @@ import by.epamtraining.airlines.dto.AirportDTO;
 import by.epamtraining.airlines.dto.FlightsDTO;
 import by.epamtraining.airlines.dto.FlightsDTOConverter;
 import by.epamtraining.airlines.exceptions.DomainNotFoundException;
-import by.epamtraining.airlines.exceptions.IncorrectFlightException;
+import by.epamtraining.airlines.exceptions.IncorrectDTOException;
 import by.epamtraining.airlines.service.AirportService;
 import by.epamtraining.airlines.service.CrewTypesService;
 import by.epamtraining.airlines.service.FlightsService;
@@ -26,8 +26,6 @@ import javax.validation.Valid;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -140,11 +138,11 @@ public class FlightsController {
             return "flightsedit";
         }
         if (flights.getDepartureAirport().getId() == flights.getDestAirport().getId()) {
-            throw new IncorrectFlightException("Destination and departure airports are equal");
+            throw new IncorrectDTOException("Destination and departure airports are equal");
         }
 
         if (flights.getDepartureTime().after(flights.getDestTime())) {
-            throw new IncorrectFlightException("Destination time is greater than departure time");
+            throw new IncorrectDTOException("Destination time is greater than departure time");
         }
 
         flightsService.save(flightsDTOConverter.convert(flights));
@@ -154,7 +152,7 @@ public class FlightsController {
     }
 
 
-    @ExceptionHandler({org.springframework.dao.DataIntegrityViolationException.class, IncorrectFlightException.class})
+    @ExceptionHandler({org.springframework.dao.DataIntegrityViolationException.class, IncorrectDTOException.class})
     public ModelAndView errorHandler(HttpServletRequest request, Exception e
     ) throws ParseException {/*
         process duplicates, some fields should be unique
@@ -200,7 +198,7 @@ public class FlightsController {
         model.addObject("flightsDTO", flightsDTO);
         if (e instanceof org.springframework.dao.DataIntegrityViolationException) {
             model.addObject("exception", ((DataIntegrityViolationException) e).getMostSpecificCause().getMessage());
-        } else if (e instanceof IncorrectFlightException) {
+        } else if (e instanceof IncorrectDTOException) {
             model.addObject("exception", e.getMessage());
         }
         return model;

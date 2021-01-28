@@ -5,6 +5,7 @@ import by.epamtraining.airlines.domain.Profession;
 import by.epamtraining.airlines.dto.PersonnelDTO;
 import by.epamtraining.airlines.dto.PersonnelDTOConverter;
 import by.epamtraining.airlines.exceptions.DomainNotFoundException;
+import by.epamtraining.airlines.exceptions.IncorrectDTOException;
 import by.epamtraining.airlines.service.PersonnelService;
 import by.epamtraining.airlines.service.ProfessionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -123,10 +127,20 @@ public class PersonnelController {
             model.addAttribute("sortasc", orderAsc);
             return "personneledit";
         }
-        //personnel.setGender(Sex.getFromName(genderName));
+        Date date = personnelDTO.getBirthDate();
+        Date now = new Date();
+
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        int yd = calendar.get(Calendar.YEAR);
+        calendar.setTime(now);
+        int yn = calendar.get(Calendar.YEAR);
+        if (yn - yd <= 18) {
+            throw new IncorrectDTOException("Incorrect birth date");
+        }
         Profession profession = professionService.getProfessionById(personnelDTO.
                 getProfession().getId()).
-                orElseThrow(() -> new IllegalArgumentException("Unknown profession"));
+                orElseThrow(() -> new IncorrectDTOException("Unknown profession"));
         personnelDTO.setProfession(profession);
         personnelService.save(personnelDTOConverter.convert(personnelDTO));
         return "redirect:/personnel/".
@@ -135,9 +149,9 @@ public class PersonnelController {
     }
 
     @ExceptionHandler({org.springframework.dao.DataIntegrityViolationException.class,
-            IllegalArgumentException.class
+            IncorrectDTOException.class
     })
-    public ModelAndView errorHandler(HttpServletRequest request, org.springframework.dao.DataIntegrityViolationException e
+    public ModelAndView errorHandler(HttpServletRequest request, Exception e
     ) {/*
         process duplicates, errors
        */
@@ -167,8 +181,12 @@ public class PersonnelController {
             personnel.setId(Integer.parseInt(request.getParameter("id")));
         }
         model.addObject("personnelDTO", personnel);
-        model.addObject("exception", e.getMostSpecificCause().getMessage());
+        if (e instanceof IncorrectDTOException) {
+            model.addObject("exception", e.getMessage());
+        } else {
+            model.addObject("exception",
+                    ((org.springframework.dao.DataIntegrityViolationException) e).getMostSpecificCause().getMessage());
+        }
         return model;
     }
-
 }
